@@ -8,7 +8,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="FitLife">
 <title>FitLife</title>
-
 <style>
 *{box-sizing:border-box}
 body{
@@ -43,7 +42,7 @@ header{
 }
 nav{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:8px;
   margin-bottom:20px;
 }
@@ -53,7 +52,7 @@ nav button{
   padding:13px 5px;
   border-radius:12px;
   font-weight:600;
-  font-size:14px;
+  font-size:13px;
 }
 nav button.active{
   background:#111827;
@@ -82,6 +81,9 @@ nav button.active{
   background:#22c55e;
   border-radius:20px;
   transition:.3s;
+}
+.energy-bar{
+  background:linear-gradient(90deg,#f59e0b,#22c55e);
 }
 .grid{
   display:grid;
@@ -154,20 +156,81 @@ button{
   background:none;
   color:#9ca3af;
 }
-.hidden{display:none}
-h2,h3{margin-top:0}
+.hidden{
+  display:none;
+}
+h2,h3{
+  margin-top:0;
+}
 .empty{
   text-align:center;
   color:#9ca3af;
   padding:20px;
 }
+.energy-card{
+  background:linear-gradient(135deg,#111827,#1f2937);
+  color:white;
+}
+.energy-card .label{
+  color:#d1d5db;
+}
+.energy-score{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.energy-number{
+  font-size:48px;
+  font-weight:900;
+}
+.energy-level{
+  color:#fde68a;
+  font-weight:700;
+}
+.course{
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:10px;
+  background:#fafafa;
+}
+.course-title{
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+.course-meta{
+  color:#6b7280;
+  font-size:13px;
+  margin-bottom:10px;
+}
+.course-description{
+  font-size:14px;
+  line-height:1.6;
+  color:#374151;
+}
+.course-button{
+  margin-top:12px;
+  width:100%;
+  border:0;
+  padding:11px;
+  border-radius:10px;
+  background:#22c55e;
+  color:white;
+  font-weight:700;
+}
+.recommend{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:15px;
+}
 </style>
 </head>
-
 <body>
-
 <div class="app">
-
 <header>
   <div>
     <div class="logo">FitLife 🏃</div>
@@ -177,52 +240,67 @@ h2,h3{margin-top:0}
   </div>
   <div class="status">● 運動中</div>
 </header>
-
 <nav>
   <button class="active" onclick="showPage('home',this)">🏠 首頁</button>
   <button onclick="showPage('workout',this)">🏋️ 訓練</button>
+  <button onclick="showPage('course',this)">🎯 課程</button>
   <button onclick="showPage('stats',this)">📊 統計</button>
 </nav>
-
+<!-- ================= 首頁 ================= -->
 <section id="home">
-
+<div class="card energy-card">
+  <div class="label">今日元氣值</div>
+  <div class="energy-score">
+    <div>
+      <div class="energy-number">
+        <span id="energyValue">0</span>
+        <span style="font-size:20px"> / 100</span>
+      </div>
+      <div id="energyLevel" class="energy-level">
+        尚未開始
+      </div>
+    </div>
+    <div style="font-size:50px" id="energyEmoji">
+      🔋
+    </div>
+  </div>
+  <div class="progress" style="background:#374151">
+    <div id="energyBar" class="bar energy-bar" style="width:0%"></div>
+  </div>
+  <p id="energyText" style="color:#d1d5db">
+    開始今天的第一個訓練吧！
+  </p>
+</div>
 <div class="card">
   <div class="label">今日運動目標</div>
   <div class="big">
     <span id="todayMinutes">0</span> / 60 分鐘
   </div>
-
   <div class="progress">
     <div id="progressBar" class="bar" style="width:0%"></div>
   </div>
-
   <p id="goalText" style="color:#6b7280">
     再運動 60 分鐘達標
   </p>
 </div>
-
 <div class="grid">
   <div class="stat">
     <div class="label">今日熱量</div>
     <div class="value" id="todayCalories">0 kcal</div>
   </div>
-
   <div class="stat">
     <div class="label">訓練次數</div>
     <div class="value" id="todaySessions">0 次</div>
   </div>
 </div>
-
 <div class="card">
   <h3>快速開始</h3>
-
   <div class="grid">
     <button class="quick" onclick="quickWorkout('跑步')">
       <span>🏃</span><br>
       <b>跑步</b><br>
       <small>有氧訓練</small>
     </button>
-
     <button class="quick" onclick="quickWorkout('重量訓練')">
       <span>🏋️</span><br>
       <b>重量訓練</b><br>
@@ -230,14 +308,11 @@ h2,h3{margin-top:0}
     </button>
   </div>
 </div>
-
 </section>
-
+<!-- ================= 訓練 ================= -->
 <section id="workout" class="hidden">
-
 <div class="card">
 <h2>新增訓練</h2>
-
 <label>
 運動項目
 <select id="type">
@@ -250,281 +325,608 @@ h2,h3{margin-top:0}
 <option>其他</option>
 </select>
 </label>
-
 <div class="grid">
-
 <label>
 時間（分鐘）
 <input id="minutes" type="number" min="1" value="30">
 </label>
-
 <label>
 熱量（kcal）
 <input id="calories" type="number" min="0" value="200">
 </label>
-
 </div>
-
 <button class="primary" onclick="addWorkout()">
 完成訓練 ✓
 </button>
-
 <p id="message"></p>
-
 </div>
-
 <div class="card">
 <h3>最近訓練</h3>
 <div id="records"></div>
 </div>
-
 </section>
-
+<!-- ================= 個人化課程 ================= -->
+<section id="course" class="hidden">
+<div class="card">
+<h2>🎯 個人化課程</h2>
+<p style="color:#6b7280">
+告訴 FitLife 你的目標，我會依照你的狀況推薦課程。
+</p>
+<label>
+你的目標
+<select id="goal">
+<option value="減脂">🔥 減脂</option>
+<option value="增肌">💪 增肌</option>
+<option value="體能">⚡ 提升體能</option>
+<option value="放鬆">🧘 放鬆與伸展</option>
+</select>
+</label>
+<label>
+目前程度
+<select id="level">
+<option value="初學者">🌱 初學者</option>
+<option value="中階">🌿 中階</option>
+<option value="進階">🌳 進階</option>
+</select>
+</label>
+<label>
+每次可運動時間
+<select id="duration">
+<option value="15">15 分鐘</option>
+<option value="30" selected>30 分鐘</option>
+<option value="45">45 分鐘</option>
+<option value="60">60 分鐘</option>
+</select>
+</label>
+<button class="primary" onclick="generateCourses()">
+✨ 產生我的課程
+</button>
+</div>
+<div class="card">
+<h3>今日推薦</h3>
+<div id="courseRecommendation" class="recommend">
+正在分析你的個人化課程...
+</div>
+<div id="courseList"></div>
+</div>
+</section>
+<!-- ================= 統計 ================= -->
 <section id="stats" class="hidden">
-
 <div class="card">
 <h2>運動統計</h2>
-
 <div class="grid">
-
 <div class="stat">
 <div class="label">總時間</div>
 <div class="value" id="totalMinutes">0 分</div>
 </div>
-
 <div class="stat">
 <div class="label">總熱量</div>
 <div class="value" id="totalCalories">0 kcal</div>
 </div>
-
 <div class="stat">
 <div class="label">訓練次數</div>
 <div class="value" id="totalSessions">0 次</div>
 </div>
-
 <div class="stat">
 <div class="label">平均時間</div>
 <div class="value" id="averageMinutes">0 分</div>
 </div>
-
 </div>
 </div>
-
 <div class="card">
 <h3>訓練分布</h3>
 <div id="distribution"></div>
 </div>
-
-</section>
-
+<div class="card">
+<h3>🌟 元氣成長</h3>
+<div class="grid">
+<div class="stat">
+<div class="label">目前元氣值</div>
+<div class="value" id="statsEnergy">0</div>
 </div>
-
+<div class="stat">
+<div class="label">今日完成度</div>
+<div class="value" id="statsCompletion">0%</div>
+</div>
+</div>
+</div>
+</section>
+</div>
 <script>
-
 let workouts =
-JSON.parse(localStorage.getItem("fitlife_workouts") || "[]");
-
+JSON.parse(
+  localStorage.getItem("fitlife_workouts") || "[]"
+);
+let profile =
+JSON.parse(
+  localStorage.getItem("fitlife_profile") || "{}"
+);
+/* ================= 儲存 ================= */
 function save(){
   localStorage.setItem(
     "fitlife_workouts",
     JSON.stringify(workouts)
   );
 }
-
+/* ================= 頁面 ================= */
 function showPage(page,button){
-
   document.querySelectorAll("section").forEach(
     s=>s.classList.add("hidden")
   );
-
-  document.getElementById(page).classList.remove("hidden");
-
+  document.getElementById(page)
+    .classList.remove("hidden");
   document.querySelectorAll("nav button").forEach(
     b=>b.classList.remove("active")
   );
-
   button.classList.add("active");
-
   update();
 }
-
+/* ================= 快速訓練 ================= */
 function quickWorkout(type){
-
   document.querySelector("#type").value=type;
-
   document.querySelectorAll("nav button")[1].click();
-
   document.querySelector("#workout").scrollIntoView({
     behavior:"smooth"
   });
 }
-
+/* ================= 新增訓練 ================= */
 function addWorkout(){
-
-  const type=document.getElementById("type").value;
-  const minutes=Number(
-    document.getElementById("minutes").value
-  );
-  const calories=Number(
-    document.getElementById("calories").value
-  );
-
+  const type =
+    document.getElementById("type").value;
+  const minutes =
+    Number(document.getElementById("minutes").value);
+  const calories =
+    Number(document.getElementById("calories").value);
   if(minutes<=0 || calories<0){
-    document.getElementById("message").textContent=
-      "請輸入有效數值。";
+    document.getElementById("message")
+      .textContent="請輸入有效數值。";
     return;
   }
-
   workouts.unshift({
     type,
     minutes,
     calories,
-    date:new Date().toLocaleDateString()
+    date:new Date().toLocaleDateString(),
+    timestamp:Date.now()
   });
-
   save();
-
-  document.getElementById("message").textContent=
-    "訓練已完成！ 💪";
-
-  update();
-}
-
-function removeWorkout(index){
-
-  workouts.splice(index,1);
-
-  save();
-
-  update();
-}
-
-function update(){
-
-  const totalMinutes=
-    workouts.reduce((sum,w)=>sum+w.minutes,0);
-
-  const totalCalories=
-    workouts.reduce((sum,w)=>sum+w.calories,0);
-
-  const count=workouts.length;
-
-  const percent=Math.min(
-    100,
-    totalMinutes/60*100
-  );
-
-  document.getElementById("todayMinutes")
-    .textContent=totalMinutes;
-
-  document.getElementById("todayCalories")
-    .textContent=totalCalories+" kcal";
-
-  document.getElementById("todaySessions")
-    .textContent=count+" 次";
-
-  document.getElementById("progressBar")
-    .style.width=percent+"%";
-
-  document.getElementById("goalText").textContent=
-    totalMinutes>=60
-    ? "今日目標完成！太棒了！ 🎉"
-    : "再運動 "+Math.max(0,60-totalMinutes)+" 分鐘達標";
-
-  document.getElementById("totalMinutes")
-    .textContent=totalMinutes+" 分";
-
-  document.getElementById("totalCalories")
-    .textContent=totalCalories+" kcal";
-
-  document.getElementById("totalSessions")
-    .textContent=count+" 次";
-
-  document.getElementById("averageMinutes")
+  document.getElementById("message")
     .textContent=
-      (count ? Math.round(totalMinutes/count):0)+" 分";
-
-  const records=document.getElementById("records");
-
-  if(!count){
-
-    records.innerHTML=
-      '<div class="empty">還沒有訓練紀錄</div>';
-
-  }else{
-
-    records.innerHTML=workouts.map(
-      (w,i)=>`
-      <div class="record">
-        <div>
-          <b>${w.type}</b>
-          <div style="color:#6b7280;font-size:13px">
-            ${w.minutes} 分鐘 · ${w.calories} kcal
-          </div>
+    "訓練已完成！元氣值增加 ⚡";
+  update();
+}
+/* ================= 刪除 ================= */
+function removeWorkout(index){
+  workouts.splice(index,1);
+  save();
+  update();
+}
+/* ================= 元氣值 ================= */
+function calculateEnergy(){
+  const today =
+    new Date().toLocaleDateString();
+  const todayWorkouts =
+    workouts.filter(
+      w=>w.date===today
+    );
+  const minutes =
+    todayWorkouts.reduce(
+      (sum,w)=>sum+w.minutes,
+      0
+    );
+  const calories =
+    todayWorkouts.reduce(
+      (sum,w)=>sum+w.calories,
+      0
+    );
+  /*
+   * 元氣值計算：
+   * 運動時間最高 60 分
+   * 熱量貢獻最高 20 分
+   * 完成訓練獎勵最高 20 分
+   */
+  const minuteScore =
+    Math.min(60,minutes);
+  const calorieScore =
+    Math.min(20,Math.round(calories/50));
+  const sessionScore =
+    Math.min(20,todayWorkouts.length*5);
+  const energy =
+    Math.min(
+      100,
+      minuteScore+
+      calorieScore+
+      sessionScore
+    );
+  return {
+    energy,
+    minutes,
+    calories,
+    sessions:todayWorkouts.length
+  };
+}
+/* ================= 元氣文字 ================= */
+function getEnergyStatus(value){
+  if(value>=90){
+    return {
+      level:"元氣爆棚",
+      emoji:"🔥",
+      text:"今天的你充滿能量！繼續保持！"
+    };
+  }
+  if(value>=70){
+    return {
+      level:"活力滿滿",
+      emoji:"⚡",
+      text:"狀態很好，適合挑戰完整訓練！"
+    };
+  }
+  if(value>=40){
+    return {
+      level:"穩定成長",
+      emoji:"💪",
+      text:"再動一點，今天的元氣會更高！"
+    };
+  }
+  if(value>0){
+    return {
+      level:"正在充電",
+      emoji:"🔋",
+      text:"完成一小段運動，就能讓元氣繼續上升。"
+    };
+  }
+  return {
+    level:"尚未開始",
+    emoji:"🌱",
+    text:"開始今天的第一個訓練吧！"
+  };
+}
+/* ================= 個人化課程 ================= */
+function generateCourses(){
+  const goal =
+    document.getElementById("goal").value;
+  const level =
+    document.getElementById("level").value;
+  const duration =
+    Number(document.getElementById("duration").value);
+  profile={
+    goal,
+    level,
+    duration
+  };
+  localStorage.setItem(
+    "fitlife_profile",
+    JSON.stringify(profile)
+  );
+  renderCourses();
+}
+/* ================= 課程資料 ================= */
+function getCourses(goal,level,duration){
+  const courses={
+    "減脂":[
+      {
+        title:"燃脂快走",
+        type:"🚶 有氧",
+        desc:"快走搭配短時間加速，適合建立穩定運動習慣。",
+        min:15
+      },
+      {
+        title:"全身燃脂循環",
+        type:"🔥 HIIT",
+        desc:"深蹲、登山者與開合跳組合，提升心肺與活動量。",
+        min:30
+      },
+      {
+        title:"跑步耐力訓練",
+        type:"🏃 跑步",
+        desc:"以穩定配速進行有氧訓練，逐步增加耐力。",
+        min:45
+      }
+    ],
+    "增肌":[
+      {
+        title:"全身肌力入門",
+        type:"🏋️ 肌力",
+        desc:"以深蹲、伏地挺身與核心動作建立全身肌力。",
+        min:15
+      },
+      {
+        title:"上肢肌力訓練",
+        type:"💪 肌力",
+        desc:"集中訓練胸、肩、背與手臂。",
+        min:30
+      },
+      {
+        title:"全身重量訓練",
+        type:"🏋️ 重量",
+        desc:"完整安排主要肌群，適合進一步建立力量。",
+        min:45
+      }
+    ],
+    "體能":[
+      {
+        title:"活力喚醒",
+        type:"⚡ 有氧",
+        desc:"透過簡單有氧動作喚醒身體與心肺。",
+        min:15
+      },
+      {
+        title:"心肺耐力挑戰",
+        type:"🏃 心肺",
+        desc:"交替進行中等強度有氧動作，提升體能。",
+        min:30
+      },
+      {
+        title:"全能體能訓練",
+        type:"🔥 綜合",
+        desc:"結合心肺、肌力與核心的完整訓練。",
+        min:45
+      }
+    ],
+    "放鬆":[
+      {
+        title:"晨間伸展",
+        type:"🌅 伸展",
+        desc:"溫和活動關節，讓身體逐漸進入運動狀態。",
+        min:15
+      },
+      {
+        title:"全身瑜伽",
+        type:"🧘 瑜伽",
+        desc:"透過瑜伽動作放鬆肌肉並提升身體活動度。",
+        min:30
+      },
+      {
+        title:"深度恢復",
+        type:"🌙 恢復",
+        desc:"以緩慢伸展與呼吸練習幫助身體恢復。",
+        min:45
+      }
+    ]
+  };
+  let list =
+    courses[goal] || courses["體能"];
+  /*
+   * 依照使用者時間調整課程
+   */
+  list=list
+    .map(c=>({
+      ...c,
+      recommended:
+        Math.abs(c.min-duration)
+    }))
+    .sort(
+      (a,b)=>
+        a.recommended-b.recommended
+    );
+  /*
+   * 初學者優先顯示較短課程
+   */
+  if(level==="初學者"){
+    list.sort(
+      (a,b)=>a.min-b.min
+    );
+  }
+  return list.slice(0,3);
+}
+/* ================= 顯示課程 ================= */
+function renderCourses(){
+  const goal =
+    profile.goal || "體能";
+  const level =
+    profile.level || "初學者";
+  const duration =
+    profile.duration || 30;
+  document.getElementById("goal").value=goal;
+  document.getElementById("level").value=level;
+  document.getElementById("duration").value=duration;
+  const energy =
+    calculateEnergy();
+  const courses =
+    getCourses(
+      goal,
+      level,
+      Number(duration)
+    );
+  const energyStatus =
+    getEnergyStatus(energy.energy);
+  document.getElementById(
+    "courseRecommendation"
+  ).innerHTML=
+    `目前元氣值 <b>${energy.energy}</b>，
+    推薦「${goal}」課程。
+    ${energyStatus.text}`;
+  document.getElementById(
+    "courseList"
+  ).innerHTML=
+    courses.map(
+      (course,index)=>`
+      <div class="course">
+        <div class="course-title">
+          ${index===0 ? "⭐ " : ""}
+          ${course.title}
         </div>
-
+        <div class="course-meta">
+          ${course.type}
+          · ${course.min} 分鐘
+          · ${level}
+        </div>
+        <div class="course-description">
+          ${course.desc}
+        </div>
         <button
-          class="delete"
-          onclick="removeWorkout(${i})">
-          刪除
+          class="course-button"
+          onclick="startCourse('${course.title}')">
+          開始課程 ▶
         </button>
       </div>
       `
     ).join("");
-
+}
+/* ================= 開始課程 ================= */
+function startCourse(title){
+  document.getElementById("message")
+    .textContent=
+    `已選擇「${title}」，開始你的訓練吧！ 💪`;
+  document.querySelectorAll("nav button")[1].click();
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+/* ================= 更新 ================= */
+function update(){
+  const totalMinutes=
+    workouts.reduce(
+      (sum,w)=>sum+w.minutes,
+      0
+    );
+  const totalCalories=
+    workouts.reduce(
+      (sum,w)=>sum+w.calories,
+      0
+    );
+  const count=
+    workouts.length;
+  const energy=
+    calculateEnergy();
+  const percent=
+    Math.min(
+      100,
+      energy.minutes/60*100
+    );
+  /*
+   * 首頁
+   */
+  document.getElementById("todayMinutes")
+    .textContent=energy.minutes;
+  document.getElementById("todayCalories")
+    .textContent=energy.calories+" kcal";
+  document.getElementById("todaySessions")
+    .textContent=energy.sessions+" 次";
+  document.getElementById("progressBar")
+    .style.width=percent+"%";
+  document.getElementById("goalText").textContent=
+    energy.minutes>=60
+    ? "今日目標完成！太棒了！ 🎉"
+    : "再運動 "+
+      Math.max(0,60-energy.minutes)+
+      " 分鐘達標";
+  /*
+   * 元氣值
+   */
+  const status=
+    getEnergyStatus(energy.energy);
+  document.getElementById("energyValue")
+    .textContent=energy.energy;
+  document.getElementById("energyLevel")
+    .textContent=status.level;
+  document.getElementById("energyEmoji")
+    .textContent=status.emoji;
+  document.getElementById("energyText")
+    .textContent=status.text;
+  document.getElementById("energyBar")
+    .style.width=energy.energy+"%";
+  /*
+   * 統計
+   */
+  document.getElementById("totalMinutes")
+    .textContent=totalMinutes+" 分";
+  document.getElementById("totalCalories")
+    .textContent=totalCalories+" kcal";
+  document.getElementById("totalSessions")
+    .textContent=count+" 次";
+  document.getElementById("averageMinutes")
+    .textContent=
+      (count
+        ? Math.round(totalMinutes/count)
+        : 0
+      )+" 分";
+  /*
+   * 最近訓練
+   */
+  const records=
+    document.getElementById("records");
+  if(!count){
+    records.innerHTML=
+      '<div class="empty">還沒有訓練紀錄</div>';
+  }else{
+    records.innerHTML=
+      workouts.map(
+        (w,i)=>`
+        <div class="record">
+          <div>
+            <b>${w.type}</b>
+            <div style="
+              color:#6b7280;
+              font-size:13px">
+              ${w.minutes} 分鐘
+              · ${w.calories} kcal
+            </div>
+          </div>
+          <button
+            class="delete"
+            onclick="removeWorkout(${i})">
+            刪除
+          </button>
+        </div>
+        `
+      ).join("");
   }
-
+  /*
+   * 訓練分布
+   */
   const distribution={};
-
   workouts.forEach(w=>{
     distribution[w.type]=
-      (distribution[w.type]||0)+w.minutes;
+      (distribution[w.type]||0)+
+      w.minutes;
   });
-
-  const dist=document.getElementById("distribution");
-
+  const dist=
+    document.getElementById("distribution");
   if(!Object.keys(distribution).length){
-
     dist.innerHTML=
       '<div class="empty">完成訓練後會顯示統計</div>';
-
   }else{
-
     dist.innerHTML=
       Object.entries(distribution).map(
         ([name,value])=>`
-
         <div style="margin-bottom:15px">
-
           <div style="
             display:flex;
             justify-content:space-between;
             font-size:14px">
-
             <span>${name}</span>
             <b>${value} 分</b>
-
           </div>
-
           <div class="progress">
             <div
               class="bar"
-              style="width:${Math.min(100,value/60*100)}%">
+              style="
+                width:${Math.min(
+                  100,
+                  value/60*100
+                )}%">
             </div>
           </div>
-
         </div>
-
         `
       ).join("");
-
   }
-
+  /*
+   * 統計頁面的元氣
+   */
+  document.getElementById("statsEnergy")
+    .textContent=energy.energy;
+  document.getElementById("statsCompletion")
+    .textContent=Math.round(percent)+"%";
+  /*
+   * 個人化課程
+   */
+  renderCourses();
 }
-
+/* ================= 啟動 ================= */
 update();
-
 </script>
-
 </body>
 </html>
