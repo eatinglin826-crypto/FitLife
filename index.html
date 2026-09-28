@@ -227,6 +227,87 @@ h2,h3{
   border-radius:14px;
   margin-bottom:15px;
 }
+/* ================= 曲線圖 ================= */
+.chart-switch{
+  display:flex;
+  background:#f3f4f6;
+  padding:4px;
+  border-radius:12px;
+  margin-bottom:16px;
+}
+.chart-switch button{
+  flex:1;
+  border:0;
+  background:transparent;
+  padding:10px;
+  border-radius:9px;
+  font-weight:700;
+  color:#6b7280;
+}
+.chart-switch button.active{
+  background:#111827;
+  color:white;
+}
+.chart-card{
+  background:white;
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+.chart-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:5px;
+}
+.chart-title h3{
+  margin:0;
+}
+.chart-subtitle{
+  color:#9ca3af;
+  font-size:12px;
+  margin-bottom:8px;
+}
+.chart-container{
+  width:100%;
+  overflow:hidden;
+}
+.chart-svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.chart-value{
+  font-size:13px;
+  font-weight:800;
+}
+.steps-color{
+  color:#2563eb;
+}
+.calories-color{
+  color:#f97316;
+}
+.energy-color{
+  color:#16a34a;
+}
+.chart-empty{
+  text-align:center;
+  color:#9ca3af;
+  padding:35px 10px;
+}
+/* 手機 */
+@media(max-width:380px){
+  .logo{
+    font-size:24px;
+  }
+  nav button{
+    font-size:12px;
+  }
+  .energy-number{
+    font-size:42px;
+  }
+}
 </style>
 </head>
 <body>
@@ -265,7 +346,11 @@ h2,h3{
     </div>
   </div>
   <div class="progress" style="background:#374151">
-    <div id="energyBar" class="bar energy-bar" style="width:0%"></div>
+    <div
+      id="energyBar"
+      class="bar energy-bar"
+      style="width:0%">
+    </div>
   </div>
   <p id="energyText" style="color:#d1d5db">
     開始今天的第一個訓練吧！
@@ -277,7 +362,11 @@ h2,h3{
     <span id="todayMinutes">0</span> / 60 分鐘
   </div>
   <div class="progress">
-    <div id="progressBar" class="bar" style="width:0%"></div>
+    <div
+      id="progressBar"
+      class="bar"
+      style="width:0%">
+    </div>
   </div>
   <p id="goalText" style="color:#6b7280">
     再運動 60 分鐘達標
@@ -286,11 +375,15 @@ h2,h3{
 <div class="grid">
   <div class="stat">
     <div class="label">今日熱量</div>
-    <div class="value" id="todayCalories">0 kcal</div>
+    <div class="value" id="todayCalories">
+      0 kcal
+    </div>
   </div>
   <div class="stat">
     <div class="label">訓練次數</div>
-    <div class="value" id="todaySessions">0 次</div>
+    <div class="value" id="todaySessions">
+      0 次
+    </div>
   </div>
 </div>
 <div class="card">
@@ -335,6 +428,16 @@ h2,h3{
 <input id="calories" type="number" min="0" value="200">
 </label>
 </div>
+<label>
+步數
+<input
+  id="steps"
+  type="number"
+  min="0"
+  value="0"
+  placeholder="例如：5000"
+>
+</label>
 <button class="primary" onclick="addWorkout()">
 完成訓練 ✓
 </button>
@@ -393,40 +496,127 @@ h2,h3{
 <!-- ================= 統計 ================= -->
 <section id="stats" class="hidden">
 <div class="card">
-<h2>運動統計</h2>
+<h2>📊 運動統計</h2>
 <div class="grid">
 <div class="stat">
 <div class="label">總時間</div>
-<div class="value" id="totalMinutes">0 分</div>
+<div class="value" id="totalMinutes">
+0 分
+</div>
 </div>
 <div class="stat">
 <div class="label">總熱量</div>
-<div class="value" id="totalCalories">0 kcal</div>
+<div class="value" id="totalCalories">
+0 kcal
+</div>
 </div>
 <div class="stat">
 <div class="label">訓練次數</div>
-<div class="value" id="totalSessions">0 次</div>
+<div class="value" id="totalSessions">
+0 次
+</div>
 </div>
 <div class="stat">
 <div class="label">平均時間</div>
-<div class="value" id="averageMinutes">0 分</div>
+<div class="value" id="averageMinutes">
+0 分
 </div>
 </div>
 </div>
+</div>
+<!-- ================= 趨勢圖 ================= -->
+<div class="card">
+<h2>📈 成長趨勢</h2>
+<p style="color:#6b7280;font-size:14px">
+查看每天步數、熱量與元氣值的變化。
+</p>
+<div class="chart-switch">
+<button
+  id="sevenDayBtn"
+  class="active"
+  onclick="changeChartRange(7)">
+7 天
+</button>
+<button
+  id="thirtyDayBtn"
+  onclick="changeChartRange(30)">
+30 天
+</button>
+</div>
+</div>
+<!-- 步數 -->
+<div class="chart-card">
+<div class="chart-title">
+<h3>👟 步數</h3>
+<div
+  id="stepsChartValue"
+  class="chart-value steps-color">
+0 步
+</div>
+</div>
+<div class="chart-subtitle">
+每日步數
+</div>
+<div id="stepsChart" class="chart-container"></div>
+</div>
+<!-- 熱量 -->
+<div class="chart-card">
+<div class="chart-title">
+<h3>🔥 熱量</h3>
+<div
+  id="caloriesChartValue"
+  class="chart-value calories-color">
+0 kcal
+</div>
+</div>
+<div class="chart-subtitle">
+每日消耗熱量
+</div>
+<div id="caloriesChart" class="chart-container"></div>
+</div>
+<!-- 元氣 -->
+<div class="chart-card">
+<div class="chart-title">
+<h3>⚡ 元氣值</h3>
+<div
+  id="energyChartValue"
+  class="chart-value energy-color">
+0 / 100
+</div>
+</div>
+<div class="chart-subtitle">
+每日元氣值
+</div>
+<div id="energyChart" class="chart-container"></div>
+</div>
+<!-- 訓練分布 -->
 <div class="card">
 <h3>訓練分布</h3>
 <div id="distribution"></div>
 </div>
+<!-- 元氣統計 -->
 <div class="card">
 <h3>🌟 元氣成長</h3>
 <div class="grid">
 <div class="stat">
-<div class="label">目前元氣值</div>
-<div class="value" id="statsEnergy">0</div>
+<div class="label">
+目前元氣值
+</div>
+<div
+  class="value"
+  id="statsEnergy">
+0
+</div>
 </div>
 <div class="stat">
-<div class="label">今日完成度</div>
-<div class="value" id="statsCompletion">0%</div>
+<div class="label">
+今日完成度
+</div>
+<div
+  class="value"
+  id="statsCompletion">
+0%
+</div>
 </div>
 </div>
 </div>
@@ -441,12 +631,29 @@ let profile =
 JSON.parse(
   localStorage.getItem("fitlife_profile") || "{}"
 );
+/* ================= 統計圖目前範圍 ================= */
+let chartRange = 7;
 /* ================= 儲存 ================= */
 function save(){
   localStorage.setItem(
     "fitlife_workouts",
     JSON.stringify(workouts)
   );
+}
+/* ================= 日期工具 ================= */
+function getDateKey(date){
+  const d = new Date(date);
+  return d.getFullYear() + "-" +
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0");
+}
+function getTodayKey(){
+  return getDateKey(new Date());
+}
+function formatChartDate(key){
+  const parts = key.split("-");
+  return Number(parts[1]) + "/" +
+    Number(parts[2]);
 }
 /* ================= 頁面 ================= */
 function showPage(page,button){
@@ -474,10 +681,18 @@ function addWorkout(){
   const type =
     document.getElementById("type").value;
   const minutes =
-    Number(document.getElementById("minutes").value);
+    Number(
+      document.getElementById("minutes").value
+    );
   const calories =
-    Number(document.getElementById("calories").value);
-  if(minutes<=0 || calories<0){
+    Number(
+      document.getElementById("calories").value
+    );
+  const steps =
+    Number(
+      document.getElementById("steps").value
+    );
+  if(minutes<=0 || calories<0 || steps<0){
     document.getElementById("message")
       .textContent="請輸入有效數值。";
     return;
@@ -486,7 +701,9 @@ function addWorkout(){
     type,
     minutes,
     calories,
+    steps,
     date:new Date().toLocaleDateString(),
+    dateKey:getTodayKey(),
     timestamp:Date.now()
   });
   save();
@@ -501,36 +718,40 @@ function removeWorkout(index){
   save();
   update();
 }
-/* ================= 元氣值 ================= */
-function calculateEnergy(){
-  const today =
-    new Date().toLocaleDateString();
-  const todayWorkouts =
-    workouts.filter(
-      w=>w.date===today
-    );
+/* ================= 單日資料 ================= */
+function getDayData(dateKey){
+  const list =
+    workouts.filter(w=>{
+      if(w.dateKey){
+        return w.dateKey===dateKey;
+      }
+      if(w.timestamp){
+        return getDateKey(w.timestamp)===dateKey;
+      }
+      return false;
+    });
   const minutes =
-    todayWorkouts.reduce(
-      (sum,w)=>sum+w.minutes,
+    list.reduce(
+      (sum,w)=>sum+Number(w.minutes||0),
       0
     );
   const calories =
-    todayWorkouts.reduce(
-      (sum,w)=>sum+w.calories,
+    list.reduce(
+      (sum,w)=>sum+Number(w.calories||0),
       0
     );
-  /*
-   * 元氣值計算：
-   * 運動時間最高 60 分
-   * 熱量貢獻最高 20 分
-   * 完成訓練獎勵最高 20 分
-   */
+  const steps =
+    list.reduce(
+      (sum,w)=>sum+Number(w.steps||0),
+      0
+    );
+  const sessions=list.length;
   const minuteScore =
     Math.min(60,minutes);
   const calorieScore =
     Math.min(20,Math.round(calories/50));
   const sessionScore =
-    Math.min(20,todayWorkouts.length*5);
+    Math.min(20,sessions*5);
   const energy =
     Math.min(
       100,
@@ -539,11 +760,16 @@ function calculateEnergy(){
       sessionScore
     );
   return {
-    energy,
     minutes,
     calories,
-    sessions:todayWorkouts.length
+    steps,
+    sessions,
+    energy
   };
+}
+/* ================= 元氣值 ================= */
+function calculateEnergy(){
+  return getDayData(getTodayKey());
 }
 /* ================= 元氣文字 ================= */
 function getEnergyStatus(value){
@@ -581,6 +807,265 @@ function getEnergyStatus(value){
     text:"開始今天的第一個訓練吧！"
   };
 }
+/* ================= 取得最近日期 ================= */
+function getDateRange(days){
+  const result=[];
+  const today=new Date();
+  for(let i=days-1;i>=0;i--){
+    const date=new Date(today);
+    date.setDate(today.getDate()-i);
+    result.push(getDateKey(date));
+  }
+  return result;
+}
+/* ================= 建立 SVG 曲線圖 ================= */
+function createLineChart(
+  elementId,
+  data,
+  valueKey,
+  unit,
+  maxValue
+){
+  const element =
+    document.getElementById(elementId);
+  if(!data.length){
+    element.innerHTML=
+      '<div class="chart-empty">目前沒有資料</div>';
+    return;
+  }
+  const width=520;
+  const height=210;
+  const paddingLeft=42;
+  const paddingRight=12;
+  const paddingTop=15;
+  const paddingBottom=38;
+  const chartWidth =
+    width-paddingLeft-paddingRight;
+  const chartHeight =
+    height-paddingTop-paddingBottom;
+  const values =
+    data.map(d=>Number(d[valueKey])||0);
+  let max =
+    maxValue || Math.max(...values,1);
+  if(max<=0){
+    max=1;
+  }
+  const points =
+    data.map((item,index)=>{
+      const x =
+        paddingLeft+
+        (data.length===1
+          ? chartWidth/2
+          : index/(data.length-1)*chartWidth
+        );
+      const y =
+        paddingTop+
+        chartHeight-
+        (Number(item[valueKey])||0)/max*chartHeight;
+      return {
+        x,
+        y,
+        value:Number(item[valueKey])||0,
+        label:item.label
+      };
+    });
+  let path="";
+  points.forEach((p,index)=>{
+    path +=
+      index===0
+      ? `M ${p.x} ${p.y}`
+      : ` L ${p.x} ${p.y}`;
+  });
+  const areaPath =
+    path+
+    ` L ${points[points.length-1].x} ${paddingTop+chartHeight}`+
+    ` L ${points[0].x} ${paddingTop+chartHeight} Z`;
+  let grid="";
+  for(let i=0;i<=4;i++){
+    const y =
+      paddingTop+
+      chartHeight-
+      (i/4)*chartHeight;
+    const value =
+      Math.round(max*i/4);
+    grid += `
+      <line
+        x1="${paddingLeft}"
+        y1="${y}"
+        x2="${width-paddingRight}"
+        y2="${y}"
+        stroke="#e5e7eb"
+        stroke-width="1"
+      />
+      <text
+        x="${paddingLeft-7}"
+        y="${y+4}"
+        text-anchor="end"
+        font-size="10"
+        fill="#9ca3af">
+        ${value}
+      </text>
+    `;
+  }
+  let labels="";
+  const labelStep =
+    data.length<=7
+      ? 1
+      : 5;
+  points.forEach((p,index)=>{
+    if(
+      index===0 ||
+      index===points.length-1 ||
+      index%labelStep===0
+    ){
+      labels += `
+        <text
+          x="${p.x}"
+          y="${height-12}"
+          text-anchor="middle"
+          font-size="10"
+          fill="#9ca3af">
+          ${p.label}
+        </text>
+      `;
+    }
+  });
+  let circles="";
+  points.forEach(p=>{
+    circles += `
+      <circle
+        cx="${p.x}"
+        cy="${p.y}"
+        r="3.5"
+        fill="white"
+        stroke="currentColor"
+        stroke-width="2.5">
+      </circle>
+    `;
+  });
+  element.innerHTML=`
+    <svg
+      class="chart-svg"
+      viewBox="0 0 ${width} ${height}"
+      preserveAspectRatio="none">
+      <defs>
+        <linearGradient
+          id="${elementId}Gradient"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1">
+          <stop
+            offset="0%"
+            stop-color="currentColor"
+            stop-opacity=".18"/>
+          <stop
+            offset="100%"
+            stop-color="currentColor"
+            stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <g>
+        ${grid}
+        ${labels}
+        <path
+          d="${areaPath}"
+          fill="url(#${elementId}Gradient)"
+          stroke="none">
+        </path>
+        <path
+          d="${path}"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+        </path>
+        ${circles}
+      </g>
+    </svg>
+  `;
+}
+/* ================= 更新曲線圖 ================= */
+function updateCharts(){
+  const dates =
+    getDateRange(chartRange);
+  const data =
+    dates.map(date=>{
+      const d=getDayData(date);
+      return {
+        date,
+        label:formatChartDate(date),
+        steps:d.steps,
+        calories:d.calories,
+        energy:d.energy
+      };
+    });
+  const latest =
+    data[data.length-1] || {
+      steps:0,
+      calories:0,
+      energy:0
+    };
+  document.getElementById(
+    "stepsChartValue"
+  ).textContent=
+    latest.steps.toLocaleString()+" 步";
+  document.getElementById(
+    "caloriesChartValue"
+  ).textContent=
+    latest.calories.toLocaleString()+" kcal";
+  document.getElementById(
+    "energyChartValue"
+  ).textContent=
+    latest.energy+" / 100";
+  const maxSteps =
+    Math.max(
+      ...data.map(d=>d.steps),
+      1000
+    );
+  const maxCalories =
+    Math.max(
+      ...data.map(d=>d.calories),
+      100
+    );
+  createLineChart(
+    "stepsChart",
+    data,
+    "steps",
+    "步",
+    Math.ceil(maxSteps/1000)*1000
+  );
+  createLineChart(
+    "caloriesChart",
+    data,
+    "calories",
+    "kcal",
+    Math.ceil(maxCalories/100)*100
+  );
+  createLineChart(
+    "energyChart",
+    data,
+    "energy",
+    "",
+    100
+  );
+}
+/* ================= 切換 7/30 天 ================= */
+function changeChartRange(days){
+  chartRange=days;
+  document.getElementById("sevenDayBtn")
+    .classList.toggle(
+      "active",
+      days===7
+    );
+  document.getElementById("thirtyDayBtn")
+    .classList.toggle(
+      "active",
+      days===30
+    );
+  updateCharts();
+}
 /* ================= 個人化課程 ================= */
 function generateCourses(){
   const goal =
@@ -588,7 +1073,9 @@ function generateCourses(){
   const level =
     document.getElementById("level").value;
   const duration =
-    Number(document.getElementById("duration").value);
+    Number(
+      document.getElementById("duration").value
+    );
   profile={
     goal,
     level,
@@ -686,9 +1173,6 @@ function getCourses(goal,level,duration){
   };
   let list =
     courses[goal] || courses["體能"];
-  /*
-   * 依照使用者時間調整課程
-   */
   list=list
     .map(c=>({
       ...c,
@@ -699,9 +1183,6 @@ function getCourses(goal,level,duration){
       (a,b)=>
         a.recommended-b.recommended
     );
-  /*
-   * 初學者優先顯示較短課程
-   */
   if(level==="初學者"){
     list.sort(
       (a,b)=>a.min-b.min
@@ -778,12 +1259,14 @@ function startCourse(title){
 function update(){
   const totalMinutes=
     workouts.reduce(
-      (sum,w)=>sum+w.minutes,
+      (sum,w)=>
+        sum+Number(w.minutes||0),
       0
     );
   const totalCalories=
     workouts.reduce(
-      (sum,w)=>sum+w.calories,
+      (sum,w)=>
+        sum+Number(w.calories||0),
       0
     );
   const count=
@@ -795,9 +1278,7 @@ function update(){
       100,
       energy.minutes/60*100
     );
-  /*
-   * 首頁
-   */
+  /* 首頁 */
   document.getElementById("todayMinutes")
     .textContent=energy.minutes;
   document.getElementById("todayCalories")
@@ -812,9 +1293,7 @@ function update(){
     : "再運動 "+
       Math.max(0,60-energy.minutes)+
       " 分鐘達標";
-  /*
-   * 元氣值
-   */
+  /* 元氣 */
   const status=
     getEnergyStatus(energy.energy);
   document.getElementById("energyValue")
@@ -827,9 +1306,7 @@ function update(){
     .textContent=status.text;
   document.getElementById("energyBar")
     .style.width=energy.energy+"%";
-  /*
-   * 統計
-   */
+  /* 統計 */
   document.getElementById("totalMinutes")
     .textContent=totalMinutes+" 分";
   document.getElementById("totalCalories")
@@ -842,9 +1319,7 @@ function update(){
         ? Math.round(totalMinutes/count)
         : 0
       )+" 分";
-  /*
-   * 最近訓練
-   */
+  /* 最近訓練 */
   const records=
     document.getElementById("records");
   if(!count){
@@ -862,6 +1337,7 @@ function update(){
               font-size:13px">
               ${w.minutes} 分鐘
               · ${w.calories} kcal
+              · ${Number(w.steps||0).toLocaleString()} 步
             </div>
           </div>
           <button
@@ -873,14 +1349,12 @@ function update(){
         `
       ).join("");
   }
-  /*
-   * 訓練分布
-   */
+  /* 訓練分布 */
   const distribution={};
   workouts.forEach(w=>{
     distribution[w.type]=
       (distribution[w.type]||0)+
-      w.minutes;
+      Number(w.minutes||0);
   });
   const dist=
     document.getElementById("distribution");
@@ -913,16 +1387,14 @@ function update(){
         `
       ).join("");
   }
-  /*
-   * 統計頁面的元氣
-   */
+  /* 統計頁面的元氣 */
   document.getElementById("statsEnergy")
     .textContent=energy.energy;
   document.getElementById("statsCompletion")
     .textContent=Math.round(percent)+"%";
-  /*
-   * 個人化課程
-   */
+  /* 更新曲線圖 */
+  updateCharts();
+  /* 個人化課程 */
   renderCourses();
 }
 /* ================= 啟動 ================= */
