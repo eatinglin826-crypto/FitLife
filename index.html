@@ -275,9 +275,11 @@ select{
     overflow:hidden;
 }
 
-svg{
+#statsChart{
     width:100%;
-    height:230px;
+    height:250px;
+    display:block;
+    overflow:visible;
 }
 
 .chart-label{
@@ -285,11 +287,124 @@ svg{
     fill:#6b7280;
 }
 
+.chart-point{
+    cursor:pointer;
+}
+
+.chart-point:hover{
+    opacity:.75;
+}
+
+/* =========================
+   曲線圖圖例
+========================= */
+
 .legend{
     display:flex;
     justify-content:space-around;
-    font-size:12px;
+    align-items:center;
+    gap:8px;
+    margin-top:12px;
+    padding:4px 0;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:13px;
+    font-weight:800;
     color:#6b7280;
+}
+
+.legend-line{
+    width:27px;
+    height:4px;
+    border-radius:999px;
+    display:inline-block;
+}
+
+/* 步數：綠色 */
+
+.steps-line{
+    background:#22c55e;
+}
+
+/* 熱量：橘色 */
+
+.calories-line{
+    background:#f59e0b;
+}
+
+/* 元氣值：藍色 */
+
+.energy-line{
+    background:#2563eb;
+}
+
+/* =========================
+   點擊日期後的詳細資料
+========================= */
+
+.chart-detail{
+    display:none;
+    margin-top:15px;
+    padding:14px;
+    background:#f9fafb;
+    border-radius:15px;
+    border:1px solid #e5e7eb;
+}
+
+.chart-detail.show{
+    display:block;
+    animation:detailFade .25s ease;
+}
+
+.chart-detail-date{
+    font-size:15px;
+    font-weight:900;
+    margin-bottom:11px;
+}
+
+.chart-detail-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.chart-detail-item{
+    background:white;
+    border-radius:12px;
+    padding:10px 6px;
+    text-align:center;
+}
+
+.chart-detail-icon{
+    font-size:19px;
+}
+
+.chart-detail-value{
+    font-size:17px;
+    font-weight:900;
+    margin-top:4px;
+}
+
+.chart-detail-label{
+    font-size:10px;
+    color:#6b7280;
+    margin-top:2px;
+}
+
+@keyframes detailFade{
+    from{
+        opacity:0;
+        transform:translateY(-4px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 /* =========================
@@ -981,6 +1096,10 @@ svg{
     </div>
 
 
+    <!-- ==================================
+         新版運動曲線
+    ================================== -->
+
     <div class="card">
 
         <div class="card-title">
@@ -1007,14 +1126,118 @@ svg{
 
 
         <svg id="statsChart"
-             viewBox="0 0 500 230">
+             viewBox="0 0 500 250"
+             preserveAspectRatio="none">
         </svg>
 
 
+        <!-- 三條線的對應圖例 -->
+
         <div class="legend">
-            <span>👟 步數</span>
-            <span>🔥 熱量</span>
-            <span>⚡ 元氣值</span>
+
+            <div class="legend-item">
+
+                <span class="legend-line steps-line"></span>
+
+                <span>
+                    👟 步數
+                </span>
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span class="legend-line calories-line"></span>
+
+                <span>
+                    🔥 熱量
+                </span>
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span class="legend-line energy-line"></span>
+
+                <span>
+                    ⚡ 元氣值
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- 點擊日期後顯示詳細資料 -->
+
+        <div class="chart-detail"
+             id="chartDetail">
+
+            <div class="chart-detail-date"
+                 id="chartDetailDate">
+                📅 今日
+            </div>
+
+
+            <div class="chart-detail-grid">
+
+                <div class="chart-detail-item">
+
+                    <div class="chart-detail-icon">
+                        👟
+                    </div>
+
+                    <div class="chart-detail-value"
+                         id="detailSteps">
+                        0
+                    </div>
+
+                    <div class="chart-detail-label">
+                        步數
+                    </div>
+
+                </div>
+
+
+                <div class="chart-detail-item">
+
+                    <div class="chart-detail-icon">
+                        🔥
+                    </div>
+
+                    <div class="chart-detail-value"
+                         id="detailCalories">
+                        0
+                    </div>
+
+                    <div class="chart-detail-label">
+                        熱量 kcal
+                    </div>
+
+                </div>
+
+
+                <div class="chart-detail-item">
+
+                    <div class="chart-detail-icon">
+                        ⚡
+                    </div>
+
+                    <div class="chart-detail-value"
+                         id="detailEnergy">
+                        0
+                    </div>
+
+                    <div class="chart-detail-label">
+                        元氣值
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -1307,15 +1530,6 @@ let profile =
     );
 
 
-/*
-    每個獎牌：
-
-    {
-        count: 3,
-        lastDate: "2026/10/04"
-    }
-*/
-
 let achievements =
     JSON.parse(
         localStorage.getItem("fitlife_achievements") || "{}"
@@ -1327,7 +1541,6 @@ let currentChartRange = 7;
 let unlockQueue = [];
 
 let unlockShowing = false;
-
 
 
 /* =====================================================
@@ -1701,10 +1914,6 @@ function checkAchievements(showAnimation = true){
             achievements[achievement.id];
 
 
-        /*
-            一次性成就只能獲得一次
-        */
-
         if(
             !achievement.repeatable &&
             record.count >= 1
@@ -1713,11 +1922,6 @@ function checkAchievements(showAnimation = true){
         }
 
 
-        /*
-            可重複成就：
-            同一天只算一次。
-        */
-
         if(
             achievement.repeatable &&
             record.lastDate === today
@@ -1725,13 +1929,6 @@ function checkAchievements(showAnimation = true){
             return;
         }
 
-
-        /*
-            ★ 重點：
-            每次重新達成：
-            count + 1
-            lastDate 更新
-        */
 
         record.count += 1;
 
@@ -1951,10 +2148,6 @@ function addWorkout(){
         JSON.stringify(workouts)
     );
 
-
-    /*
-        新增運動後立刻自動檢查成就
-    */
 
     checkAchievements(true);
 
@@ -2560,6 +2753,91 @@ function setChartRange(range){
 }
 
 
+/* =====================================================
+   點擊曲線日期
+===================================================== */
+
+function showChartDay(index){
+
+    const dates = [];
+
+    for(
+        let i=currentChartRange-1;
+        i>=0;
+        i--
+    ){
+
+        const date =
+            new Date();
+
+        date.setDate(
+            date.getDate()-i
+        );
+
+        dates.push(
+            getDateKey(date)
+        );
+
+    }
+
+
+    const dateKey =
+        dates[index];
+
+
+    if(!dateKey){
+        return;
+    }
+
+
+    const data =
+        getDayData(dateKey);
+
+
+    const parts =
+        dateKey.split("-");
+
+
+    const displayDate =
+        `${parts[0]}/${parts[1]}/${parts[2]}`;
+
+
+    document.getElementById(
+        "chartDetailDate"
+    ).textContent =
+        "📅 " + displayDate;
+
+
+    document.getElementById(
+        "detailSteps"
+    ).textContent =
+        data.steps.toLocaleString();
+
+
+    document.getElementById(
+        "detailCalories"
+    ).textContent =
+        data.calories.toLocaleString();
+
+
+    document.getElementById(
+        "detailEnergy"
+    ).textContent =
+        data.energy;
+
+
+    document.getElementById(
+        "chartDetail"
+    ).classList.add("show");
+
+}
+
+
+
+/* =====================================================
+   曲線圖
+===================================================== */
+
 function drawChart(){
 
     const svg =
@@ -2575,7 +2853,7 @@ function drawChart(){
 
     const width = 500;
 
-    const height = 230;
+    const height = 250;
 
     const left = 35;
 
@@ -2583,7 +2861,7 @@ function drawChart(){
 
     const top = 15;
 
-    const bottom = 35;
+    const bottom = 40;
 
 
     const chartWidth =
@@ -2606,7 +2884,6 @@ function drawChart(){
         const date =
             new Date();
 
-
         date.setDate(
             date.getDate()-i
         );
@@ -2625,6 +2902,12 @@ function drawChart(){
         );
 
 
+    /*
+        三條線各自使用自己的最大值，
+        這樣步數很大時，
+        不會把熱量和元氣值壓扁。
+    */
+
     const maxSteps =
         Math.max(
             10000,
@@ -2641,6 +2924,9 @@ function drawChart(){
                 d => d.calories
             )
         );
+
+
+    const maxEnergy = 100;
 
 
     function x(i){
@@ -2681,7 +2967,9 @@ function drawChart(){
     let html = "";
 
 
-    /* 網格 */
+    /* =========================
+       網格線
+    ========================= */
 
     for(let i=0;i<=4;i++){
 
@@ -2704,7 +2992,10 @@ function drawChart(){
     }
 
 
-    /* 步數 */
+    /* =========================
+       👟 步數
+       綠色
+    ========================= */
 
     html += `
         <path
@@ -2713,15 +3004,18 @@ function drawChart(){
                 maxSteps
             )}"
             fill="none"
-            stroke="#111827"
-            stroke-width="3"
+            stroke="#22c55e"
+            stroke-width="3.5"
             stroke-linecap="round"
             stroke-linejoin="round"
         />
     `;
 
 
-    /* 熱量 */
+    /* =========================
+       🔥 熱量
+       橘色
+    ========================= */
 
     html += `
         <path
@@ -2731,31 +3025,98 @@ function drawChart(){
             )}"
             fill="none"
             stroke="#f59e0b"
-            stroke-width="3"
+            stroke-width="3.5"
             stroke-linecap="round"
             stroke-linejoin="round"
         />
     `;
 
 
-    /* 元氣 */
+    /* =========================
+       ⚡ 元氣值
+       藍色
+    ========================= */
 
     html += `
         <path
             d="${makePath(
                 data.map(d=>d.energy),
-                100
+                maxEnergy
             )}"
             fill="none"
-            stroke="#22c55e"
-            stroke-width="3"
+            stroke="#2563eb"
+            stroke-width="3.5"
             stroke-linecap="round"
             stroke-linejoin="round"
         />
     `;
 
 
-    /* 日期 */
+    /* =========================
+       三條線的資料點
+    ========================= */
+
+    data.forEach((d,i) => {
+
+        /*
+            步數資料點
+        */
+
+        html += `
+            <circle
+                class="chart-point"
+                cx="${x(i)}"
+                cy="${y(d.steps,maxSteps)}"
+                r="4.5"
+                fill="#22c55e"
+                stroke="white"
+                stroke-width="2"
+                onclick="showChartDay(${i})"
+            />
+        `;
+
+
+        /*
+            熱量資料點
+        */
+
+        html += `
+            <circle
+                class="chart-point"
+                cx="${x(i)}"
+                cy="${y(d.calories,maxCalories)}"
+                r="4.5"
+                fill="#f59e0b"
+                stroke="white"
+                stroke-width="2"
+                onclick="showChartDay(${i})"
+            />
+        `;
+
+
+        /*
+            元氣值資料點
+        */
+
+        html += `
+            <circle
+                class="chart-point"
+                cx="${x(i)}"
+                cy="${y(d.energy,maxEnergy)}"
+                r="4.5"
+                fill="#2563eb"
+                stroke="white"
+                stroke-width="2"
+                onclick="showChartDay(${i})"
+            />
+        `;
+
+    });
+
+
+    /* =========================
+       日期
+    ========================= */
 
     data.forEach(
         (d,i) => {
@@ -2792,6 +3153,15 @@ function drawChart(){
 
     svg.innerHTML =
         html;
+
+
+    /*
+        預設顯示今天
+    */
+
+    showChartDay(
+        data.length-1
+    );
 
 }
 
@@ -3046,15 +3416,7 @@ function renderAchievements(){
 
 function update(){
 
-    /*
-       載入時自動判定一次。
-
-       這裡不播放動畫，
-       避免每次重新整理頁面一直跳動畫。
-    */
-
     checkAchievements(false);
-
 
     updateHome();
 
