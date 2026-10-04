@@ -7,9 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="廷廷運動">
+
 <title>廷廷運動</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
@@ -18,27 +20,27 @@
 body{
     margin:0;
     background:#f3f4f6;
-    font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif;
     color:#111827;
+    font-family:-apple-system,BlinkMacSystemFont,
+    "Noto Sans TC","PingFang TC",sans-serif;
 }
 
 .app{
     max-width:600px;
     margin:auto;
     min-height:100vh;
-    background:#f3f4f6;
 }
 
 header{
     background:#111827;
     color:white;
-    padding:22px 18px 20px;
+    padding:22px 18px;
     border-radius:0 0 22px 22px;
 }
 
 .logo{
     font-size:25px;
-    font-weight:800;
+    font-weight:900;
 }
 
 .tagline{
@@ -50,8 +52,8 @@ header{
 .status{
     display:inline-block;
     margin-top:12px;
-    background:#22c55e;
     padding:6px 11px;
+    background:#22c55e;
     border-radius:999px;
     font-size:12px;
     font-weight:bold;
@@ -62,8 +64,8 @@ main{
     padding-bottom:100px;
 }
 
-section.hidden{
-    display:none;
+.hidden{
+    display:none!important;
 }
 
 .card{
@@ -76,9 +78,13 @@ section.hidden{
 
 .card-title{
     font-size:17px;
-    font-weight:800;
+    font-weight:900;
     margin-bottom:13px;
 }
+
+/* =========================
+   首頁
+========================= */
 
 .energy-card{
     background:linear-gradient(135deg,#111827,#1f2937);
@@ -87,37 +93,37 @@ section.hidden{
 
 .energy-top{
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
 }
 
 .energy-value{
-    font-size:42px;
+    font-size:44px;
     font-weight:900;
 }
 
 .energy-emoji{
-    font-size:40px;
+    font-size:43px;
 }
 
 .progress{
-    height:11px;
+    height:10px;
     background:#374151;
-    border-radius:99px;
+    border-radius:999px;
     overflow:hidden;
     margin:12px 0 8px;
 }
 
 .progress-bar{
     height:100%;
-    background:#22c55e;
     width:0%;
+    background:#22c55e;
     transition:.5s;
 }
 
 .energy-text{
     font-size:13px;
-    opacity:.85;
+    opacity:.8;
 }
 
 .goal-number{
@@ -128,52 +134,6 @@ section.hidden{
 .goal-small{
     color:#6b7280;
     font-size:13px;
-}
-
-.quick-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-button{
-    border:0;
-    border-radius:13px;
-    padding:13px;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.primary{
-    background:#111827;
-    color:white;
-}
-
-.green{
-    background:#22c55e;
-    color:white;
-}
-
-.gray{
-    background:#e5e7eb;
-    color:#111827;
-}
-
-input,select{
-    width:100%;
-    padding:12px;
-    border:1px solid #d1d5db;
-    border-radius:11px;
-    margin-top:6px;
-    margin-bottom:12px;
-    font-size:15px;
-    background:white;
-}
-
-label{
-    font-size:13px;
-    font-weight:700;
 }
 
 .stats-grid{
@@ -199,9 +159,77 @@ label{
     margin-top:4px;
 }
 
+.quick-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+/* =========================
+   按鈕
+========================= */
+
+button{
+    border:0;
+    border-radius:13px;
+    padding:13px;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.primary{
+    background:#111827;
+    color:white;
+}
+
+.green{
+    background:#22c55e;
+    color:white;
+}
+
+.gray{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.delete-btn{
+    background:#fee2e2;
+    color:#dc2626;
+    padding:7px 10px;
+    font-size:12px;
+}
+
+/* =========================
+   表單
+========================= */
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:800;
+    margin-top:8px;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:12px;
+    border:1px solid #d1d5db;
+    border-radius:11px;
+    background:white;
+    font-size:15px;
+}
+
+/* =========================
+   訓練紀錄
+========================= */
+
 .workout-item{
-    border-bottom:1px solid #e5e7eb;
     padding:13px 0;
+    border-bottom:1px solid #e5e7eb;
 }
 
 .workout-item:last-child{
@@ -215,28 +243,22 @@ label{
     gap:8px;
 }
 
-.delete-btn{
-    background:#fee2e2;
-    color:#dc2626;
-    padding:7px 10px;
-    font-size:12px;
+.empty{
+    text-align:center;
+    color:#9ca3af;
+    padding:20px;
+    font-size:13px;
 }
 
-.badge{
-    display:inline-block;
-    background:#ecfdf5;
-    color:#16a34a;
-    padding:4px 8px;
-    border-radius:999px;
-    font-size:11px;
-    font-weight:700;
-}
+/* =========================
+   圖表
+========================= */
 
 .chart-tabs{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:8px;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .chart-tab{
@@ -250,17 +272,16 @@ label{
 }
 
 .chart-box{
-    overflow-x:auto;
+    overflow:hidden;
 }
 
 svg{
     width:100%;
     height:230px;
-    display:block;
 }
 
 .chart-label{
-    font-size:11px;
+    font-size:10px;
     fill:#6b7280;
 }
 
@@ -269,12 +290,11 @@ svg{
     justify-content:space-around;
     font-size:12px;
     color:#6b7280;
-    margin-top:5px;
 }
 
-.course-option{
-    margin-bottom:12px;
-}
+/* =========================
+   底部導航
+========================= */
 
 .nav{
     position:fixed;
@@ -286,14 +306,14 @@ svg{
     border-top:1px solid #e5e7eb;
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    padding:8px 5px calc(8px + env(safe-area-inset-bottom));
-    z-index:50;
+    padding:7px 4px calc(7px + env(safe-area-inset-bottom));
+    z-index:100;
 }
 
 .nav button{
     background:none;
     color:#6b7280;
-    padding:7px 2px;
+    padding:6px 2px;
     font-size:11px;
 }
 
@@ -303,7 +323,7 @@ svg{
 }
 
 /* =========================
-   成就系統
+   成就總覽
 ========================= */
 
 .achievement-summary{
@@ -314,20 +334,24 @@ svg{
     margin-bottom:14px;
 }
 
-.achievement-total{
+.achievement-top{
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
-.total-medal-number{
-    font-size:42px;
+.total-number{
+    font-size:44px;
     font-weight:900;
 }
 
-.total-medal-label{
-    opacity:.8;
-    font-size:13px;
+.total-label{
+    font-size:12px;
+    opacity:.75;
+}
+
+.trophy-big{
+    font-size:62px;
 }
 
 .achievement-progress{
@@ -335,51 +359,59 @@ svg{
     background:#374151;
     border-radius:99px;
     overflow:hidden;
-    margin-top:13px;
+    margin-top:14px;
 }
 
 .achievement-progress-bar{
+    width:0%;
     height:100%;
     background:#fbbf24;
-    width:0%;
     transition:.5s;
 }
+
+/* =========================
+   最近獲得
+========================= */
 
 .latest-achievement{
     background:#fffbeb;
     border:1px solid #fde68a;
-    border-radius:17px;
+    border-radius:18px;
     padding:15px;
     margin-bottom:14px;
 }
 
 .latest-title{
-    color:#92400e;
-    font-weight:800;
     font-size:13px;
+    color:#92400e;
+    font-weight:900;
 }
 
 .latest-content{
     display:flex;
     align-items:center;
     gap:13px;
-    margin-top:9px;
+    margin-top:10px;
 }
 
 .latest-icon{
-    font-size:42px;
+    font-size:47px;
 }
 
 .latest-name{
+    font-size:19px;
     font-weight:900;
-    font-size:18px;
 }
 
 .latest-date{
-    color:#92400e;
     font-size:12px;
-    margin-top:3px;
+    color:#92400e;
+    margin-top:4px;
 }
+
+/* =========================
+   獎牌收藏
+========================= */
 
 .achievement-grid{
     display:grid;
@@ -391,10 +423,9 @@ svg{
     background:white;
     border-radius:18px;
     padding:15px;
-    min-height:205px;
+    min-height:210px;
     box-shadow:0 3px 12px rgba(0,0,0,.06);
     position:relative;
-    overflow:hidden;
 }
 
 .medal-card.unlocked{
@@ -402,48 +433,48 @@ svg{
 }
 
 .medal-card.locked{
-    opacity:.52;
+    opacity:.5;
     filter:grayscale(.9);
 }
 
 .medal-icon{
-    font-size:47px;
     text-align:center;
-    margin:4px 0 8px;
+    font-size:48px;
+    margin:3px 0 7px;
 }
 
 .medal-name{
     text-align:center;
-    font-weight:900;
     font-size:16px;
+    font-weight:900;
 }
 
 .medal-description{
     text-align:center;
-    color:#6b7280;
     font-size:11px;
+    color:#6b7280;
     line-height:1.5;
     margin-top:6px;
 }
 
 .medal-count{
     text-align:center;
-    margin-top:9px;
+    margin-top:10px;
+    color:#b45309;
     font-size:13px;
     font-weight:900;
-    color:#b45309;
 }
 
 .medal-date{
     text-align:center;
-    margin-top:4px;
+    margin-top:5px;
     font-size:11px;
     color:#6b7280;
 }
 
 .locked-text{
     text-align:center;
-    margin-top:10px;
+    margin-top:11px;
     font-size:12px;
     color:#6b7280;
 }
@@ -455,12 +486,12 @@ svg{
 .unlock-overlay{
     position:fixed;
     inset:0;
-    background:rgba(17,24,39,.82);
-    z-index:200;
+    background:rgba(17,24,39,.84);
+    z-index:500;
     display:none;
     align-items:center;
     justify-content:center;
-    padding:25px;
+    padding:20px;
 }
 
 .unlock-overlay.show{
@@ -470,170 +501,272 @@ svg{
 .unlock-box{
     width:min(370px,100%);
     background:white;
-    border-radius:25px;
-    padding:28px 20px;
+    border-radius:27px;
+    padding:25px 20px;
     text-align:center;
+    box-shadow:0 20px 70px rgba(0,0,0,.4);
     animation:unlockPop .65s cubic-bezier(.2,1.4,.4,1);
-    box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.sparkles{
+    font-size:25px;
+    letter-spacing:7px;
 }
 
 .unlock-title{
+    color:#92400e;
     font-size:22px;
     font-weight:900;
-    color:#92400e;
 }
 
 .unlock-medal{
     font-size:90px;
-    margin:13px 0;
-    animation:medalBounce 1.1s ease infinite alternate;
+    margin:12px 0;
+    animation:medalFloat 1s ease-in-out infinite alternate;
 }
 
 .unlock-name{
-    font-size:25px;
+    font-size:26px;
     font-weight:900;
 }
 
 .unlock-description{
     color:#6b7280;
     font-size:13px;
-    margin:8px 0;
+    margin-top:7px;
 }
 
 .unlock-date{
     color:#92400e;
     font-size:13px;
-    font-weight:800;
-    margin-bottom:16px;
-}
-
-.sparkles{
-    font-size:24px;
-    letter-spacing:10px;
+    font-weight:900;
+    margin:10px 0 16px;
 }
 
 @keyframes unlockPop{
+
     0%{
-        transform:scale(.3) rotate(-8deg);
+        transform:scale(.2) rotate(-12deg);
         opacity:0;
     }
+
     70%{
         transform:scale(1.08) rotate(2deg);
     }
+
     100%{
-        transform:scale(1) rotate(0);
+        transform:scale(1);
         opacity:1;
     }
 }
 
-@keyframes medalBounce{
+@keyframes medalFloat{
+
     from{
         transform:translateY(0) rotate(-4deg);
     }
+
     to{
         transform:translateY(-10px) rotate(4deg);
     }
 }
 
-.empty{
-    text-align:center;
-    color:#9ca3af;
-    padding:20px;
-    font-size:13px;
-}
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
 
 <header>
-    <div class="logo">廷廷運動 🏃</div>
-    <div class="tagline">今天也一起動起來</div>
-    <div class="status">● 運動中</div>
+
+    <div class="logo">
+        廷廷運動 🏃
+    </div>
+
+    <div class="tagline">
+        今天也一起動起來
+    </div>
+
+    <div class="status">
+        ● 運動中
+    </div>
+
 </header>
+
 
 <main>
 
-<!-- ================= 首頁 ================= -->
+
+<!-- ==================================
+     首頁
+================================== -->
 
 <section id="home">
 
     <div class="card energy-card">
+
         <div class="energy-top">
+
             <div>
-                <div style="font-size:14px;opacity:.8;">今日元氣值</div>
-                <div class="energy-value" id="energyValue">0</div>
-                <div id="energyLevel">尚未開始</div>
+
+                <div style="font-size:14px;opacity:.8;">
+                    今日元氣值
+                </div>
+
+                <div class="energy-value"
+                     id="energyValue">
+                    0
+                </div>
+
+                <div id="energyLevel">
+                    尚未開始
+                </div>
+
             </div>
-            <div class="energy-emoji" id="energyEmoji">🌱</div>
+
+            <div class="energy-emoji"
+                 id="energyEmoji">
+                🌱
+            </div>
+
         </div>
+
 
         <div class="progress">
-            <div class="progress-bar" id="energyBar"></div>
+
+            <div class="progress-bar"
+                 id="energyBar">
+            </div>
+
         </div>
 
-        <div class="energy-text" id="energyText">
+
+        <div class="energy-text"
+             id="energyText">
             開始今天的第一個訓練吧！
         </div>
+
     </div>
+
 
     <div class="card">
-        <div class="card-title">🎯 今日運動目標</div>
+
+        <div class="card-title">
+            🎯 今日運動目標
+        </div>
 
         <div class="goal-number">
-            <span id="todayMinutes">0</span>
-            <span style="font-size:15px;font-weight:500;">/ 60 分鐘</span>
+
+            <span id="todayMinutes">
+                0
+            </span>
+
+            <span style="font-size:15px;font-weight:500;">
+                / 60 分鐘
+            </span>
+
         </div>
 
-        <div class="progress" style="background:#e5e7eb;">
-            <div class="progress-bar" id="progressBar"></div>
+
+        <div class="progress"
+             style="background:#e5e7eb;">
+
+            <div class="progress-bar"
+                 id="progressBar">
+            </div>
+
         </div>
 
-        <div class="goal-small" id="goalText">
+
+        <div class="goal-small"
+             id="goalText">
             再運動 60 分鐘達標
         </div>
+
     </div>
+
 
     <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-number" id="todayCalories">0</div>
-            <div class="stat-label">今日熱量 kcal</div>
-        </div>
 
         <div class="stat-card">
-            <div class="stat-number" id="todaySessions">0</div>
-            <div class="stat-label">今日訓練次數</div>
+
+            <div class="stat-number"
+                 id="todayCalories">
+                0
+            </div>
+
+            <div class="stat-label">
+                今日熱量 kcal
+            </div>
+
         </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-number"
+                 id="todaySessions">
+                0
+            </div>
+
+            <div class="stat-label">
+                今日訓練次數
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="card" style="margin-top:14px;">
-        <div class="card-title">⚡ 快速開始</div>
+
+    <div class="card"
+         style="margin-top:14px;">
+
+        <div class="card-title">
+            ⚡ 快速開始
+        </div>
 
         <div class="quick-grid">
-            <button class="primary" onclick="quickWorkout('跑步')">
+
+            <button class="primary"
+                    onclick="quickWorkout('跑步')">
                 🏃 跑步
             </button>
 
-            <button class="green" onclick="quickWorkout('重量訓練')">
+            <button class="green"
+                    onclick="quickWorkout('重量訓練')">
                 🏋️ 重量訓練
             </button>
+
         </div>
+
     </div>
 
 </section>
 
 
-<!-- ================= 訓練 ================= -->
 
-<section id="workout" class="hidden">
+<!-- ==================================
+     訓練
+================================== -->
+
+<section id="workout"
+         class="hidden">
 
     <div class="card">
-        <div class="card-title">🏋️ 新增訓練</div>
 
-        <label>運動類型</label>
+        <div class="card-title">
+            🏋️ 新增訓練
+        </div>
+
+
+        <label>
+            運動類型
+        </label>
+
         <select id="type">
+
             <option>跑步</option>
             <option>健走</option>
             <option>騎單車</option>
@@ -641,216 +774,393 @@ svg{
             <option>重量訓練</option>
             <option>瑜伽</option>
             <option>其他</option>
+
         </select>
 
-        <label>運動時間（分鐘）</label>
-        <input id="minutes" type="number" min="1" value="30">
 
-        <label>消耗熱量（kcal）</label>
-        <input id="calories" type="number" min="0" value="200">
+        <label>
+            運動時間（分鐘）
+        </label>
 
-        <label>步數</label>
-        <input id="steps" type="number" min="0" value="0">
+        <input id="minutes"
+               type="number"
+               min="1"
+               value="30">
 
-        <button class="green" style="width:100%;" onclick="addWorkout()">
+
+        <label>
+            消耗熱量（kcal）
+        </label>
+
+        <input id="calories"
+               type="number"
+               min="0"
+               value="200">
+
+
+        <label>
+            步數
+        </label>
+
+        <input id="steps"
+               type="number"
+               min="0"
+               value="0">
+
+
+        <button class="green"
+                style="width:100%;"
+                onclick="addWorkout()">
+
             完成訓練 ✓
+
         </button>
+
     </div>
 
+
     <div class="card">
-        <div class="card-title">📋 訓練紀錄</div>
+
+        <div class="card-title">
+            📋 訓練紀錄
+        </div>
+
         <div id="workoutList"></div>
+
     </div>
 
 </section>
 
 
-<!-- ================= 課程 ================= -->
 
-<section id="courses" class="hidden">
+<!-- ==================================
+     課程
+================================== -->
+
+<section id="courses"
+         class="hidden">
 
     <div class="card">
-        <div class="card-title">🎯 我的訓練課程</div>
 
-        <div class="course-option">
-            <label>訓練目標</label>
-            <select id="goal">
-                <option>減脂</option>
-                <option>增肌</option>
-                <option selected>體能</option>
-                <option>放鬆</option>
-            </select>
+        <div class="card-title">
+            🎯 我的訓練課程
         </div>
 
-        <div class="course-option">
-            <label>程度</label>
-            <select id="level">
-                <option selected>初學者</option>
-                <option>中階</option>
-                <option>進階</option>
-            </select>
-        </div>
 
-        <div class="course-option">
-            <label>每次時間</label>
-            <select id="duration">
-                <option>15</option>
-                <option selected>30</option>
-                <option>45</option>
-                <option>60</option>
-            </select>
-        </div>
+        <label>
+            訓練目標
+        </label>
 
-        <button class="primary" style="width:100%;" onclick="generateCourses()">
+        <select id="goal">
+
+            <option>減脂</option>
+            <option>增肌</option>
+            <option selected>體能</option>
+            <option>放鬆</option>
+
+        </select>
+
+
+        <label>
+            程度
+        </label>
+
+        <select id="level">
+
+            <option selected>初學者</option>
+            <option>中階</option>
+            <option>進階</option>
+
+        </select>
+
+
+        <label>
+            每次時間
+        </label>
+
+        <select id="duration">
+
+            <option>15</option>
+            <option selected>30</option>
+            <option>45</option>
+            <option>60</option>
+
+        </select>
+
+
+        <button class="primary"
+                style="width:100%;"
+                onclick="generateCourses()">
+
             ✨ 產生我的課程
+
         </button>
+
     </div>
+
 
     <div id="courseResult"></div>
 
 </section>
 
 
-<!-- ================= 統計 ================= -->
 
-<section id="stats" class="hidden">
+<!-- ==================================
+     統計
+================================== -->
+
+<section id="stats"
+         class="hidden">
 
     <div class="card">
-        <div class="card-title">📊 運動統計</div>
+
+        <div class="card-title">
+            📊 運動統計
+        </div>
+
 
         <div class="stats-grid">
 
             <div class="stat-card">
-                <div class="stat-number" id="totalMinutes">0</div>
-                <div class="stat-label">總時間</div>
+
+                <div class="stat-number"
+                     id="totalMinutes">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    總時間
+                </div>
+
             </div>
 
-            <div class="stat-card">
-                <div class="stat-number" id="totalCalories">0</div>
-                <div class="stat-label">總熱量</div>
-            </div>
 
             <div class="stat-card">
-                <div class="stat-number" id="totalSessions">0</div>
-                <div class="stat-label">訓練次數</div>
+
+                <div class="stat-number"
+                     id="totalCalories">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    總熱量
+                </div>
+
             </div>
 
+
             <div class="stat-card">
-                <div class="stat-number" id="averageMinutes">0</div>
-                <div class="stat-label">平均時間</div>
+
+                <div class="stat-number"
+                     id="totalSessions">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    訓練次數
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-number"
+                     id="averageMinutes">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    平均時間
+                </div>
+
             </div>
 
         </div>
+
     </div>
 
 
     <div class="card">
-        <div class="card-title">📈 運動曲線</div>
+
+        <div class="card-title">
+            📈 運動曲線
+        </div>
+
 
         <div class="chart-tabs">
-            <button class="chart-tab active" id="chart7Btn" onclick="setChartRange(7)">
+
+            <button class="chart-tab active"
+                    id="chart7Btn"
+                    onclick="setChartRange(7)">
                 7 天
             </button>
 
-            <button class="chart-tab" id="chart30Btn" onclick="setChartRange(30)">
+
+            <button class="chart-tab"
+                    id="chart30Btn"
+                    onclick="setChartRange(30)">
                 30 天
             </button>
+
         </div>
 
-        <div class="chart-box">
-            <svg id="statsChart" viewBox="0 0 500 230"></svg>
-        </div>
+
+        <svg id="statsChart"
+             viewBox="0 0 500 230">
+        </svg>
+
 
         <div class="legend">
             <span>👟 步數</span>
             <span>🔥 熱量</span>
             <span>⚡ 元氣值</span>
         </div>
+
     </div>
 
 
     <div class="card">
-        <div class="card-title">🏃 訓練分布</div>
+
+        <div class="card-title">
+            🏃 訓練分布
+        </div>
+
         <div id="distribution"></div>
+
     </div>
 
 
     <div class="card">
-        <div class="card-title">🌟 元氣成長</div>
+
+        <div class="card-title">
+            🌟 元氣成長
+        </div>
+
 
         <div class="stats-grid">
 
             <div class="stat-card">
-                <div class="stat-number" id="statsEnergy">0</div>
-                <div class="stat-label">目前元氣值</div>
+
+                <div class="stat-number"
+                     id="statsEnergy">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    目前元氣值
+                </div>
+
             </div>
 
+
             <div class="stat-card">
-                <div class="stat-number" id="statsCompletion">0%</div>
-                <div class="stat-label">今日完成度</div>
+
+                <div class="stat-number"
+                     id="statsCompletion">
+                    0%
+                </div>
+
+                <div class="stat-label">
+                    今日完成度
+                </div>
+
             </div>
 
         </div>
+
     </div>
 
 </section>
 
 
-<!-- ================= 成就 ================= -->
 
-<section id="achievements" class="hidden">
+<!-- ==================================
+     成就頁
+================================== -->
+
+<section id="achievements"
+         class="hidden">
+
 
     <div class="achievement-summary">
 
-        <div class="achievement-total">
+        <div class="achievement-top">
 
             <div>
+
                 <div style="font-size:14px;opacity:.8;">
                     🏅 總獲得獎牌數
                 </div>
 
-                <div class="total-medal-number" id="totalMedals">
+
+                <div class="total-number"
+                     id="totalMedals">
                     0
                 </div>
 
-                <div class="total-medal-label">
+
+                <div class="total-label">
                     所有成就累計
                 </div>
+
             </div>
 
-            <div style="font-size:60px;">
+
+            <div class="trophy-big">
                 🏆
             </div>
 
         </div>
 
+
         <div class="achievement-progress">
-            <div
-                class="achievement-progress-bar"
-                id="achievementProgressBar">
+
+            <div class="achievement-progress-bar"
+                 id="achievementProgressBar">
             </div>
+
         </div>
 
+
         <div style="font-size:12px;opacity:.75;margin-top:7px;">
+
             已解鎖
-            <span id="unlockedAchievementCount">0</span>
+            <span id="unlockedAchievementCount">
+                0
+            </span>
+
             /
-            <span id="achievementCount">0</span>
+
+            <span id="achievementCount">
+                0
+            </span>
+
             項成就
+
         </div>
 
     </div>
 
 
-    <div class="latest-achievement" id="latestAchievement">
+
+    <div class="latest-achievement"
+         id="latestAchievement">
+
         <div class="latest-title">
             🌟 最近獲得
         </div>
 
+
         <div class="latest-content">
-            <div class="latest-icon">🏅</div>
+
+            <div class="latest-icon">
+                🏅
+            </div>
+
 
             <div>
+
                 <div class="latest-name">
                     還沒有獲得獎牌
                 </div>
@@ -858,15 +1168,26 @@ svg{
                 <div class="latest-date">
                     完成訓練後就有機會獲得！
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
 
-    <div class="card">
-        <div class="card-title">🏅 我的獎牌收藏</div>
 
-        <div class="achievement-grid" id="achievementGrid"></div>
+    <div class="card">
+
+        <div class="card-title">
+            🏅 我的獎牌收藏
+        </div>
+
+
+        <div class="achievement-grid"
+             id="achievementGrid">
+        </div>
+
     </div>
 
 </section>
@@ -874,25 +1195,33 @@ svg{
 </main>
 
 
-<!-- ================= 底部導航 ================= -->
+
+<!-- ==================================
+     底部導航
+================================== -->
 
 <nav class="nav">
 
-    <button class="active" onclick="showPage('home',this)">
+    <button class="active"
+            onclick="showPage('home',this)">
         🏠<br>首頁
     </button>
+
 
     <button onclick="showPage('workout',this)">
         🏋️<br>訓練
     </button>
 
+
     <button onclick="showPage('courses',this)">
         🎯<br>課程
     </button>
 
+
     <button onclick="showPage('stats',this)">
         📊<br>統計
     </button>
+
 
     <button onclick="showPage('achievements',this)">
         🏅<br>成就
@@ -903,9 +1232,13 @@ svg{
 </div>
 
 
-<!-- ================= 解鎖動畫 ================= -->
 
-<div class="unlock-overlay" id="unlockOverlay">
+<!-- ==================================
+     獎牌解鎖動畫
+================================== -->
+
+<div class="unlock-overlay"
+     id="unlockOverlay">
 
     <div class="unlock-box">
 
@@ -913,28 +1246,41 @@ svg{
             ✨ 🏆 ✨
         </div>
 
+
         <div class="unlock-title">
             成就解鎖！
         </div>
 
-        <div class="unlock-medal" id="unlockMedal">
+
+        <div class="unlock-medal"
+             id="unlockMedal">
             🏆
         </div>
 
-        <div class="unlock-name" id="unlockName">
+
+        <div class="unlock-name"
+             id="unlockName">
             廷廷大王
         </div>
 
-        <div class="unlock-description" id="unlockDescription">
+
+        <div class="unlock-description"
+             id="unlockDescription">
             完成特殊挑戰
         </div>
 
-        <div class="unlock-date" id="unlockDate">
+
+        <div class="unlock-date"
+             id="unlockDate">
             最近獲得：2026/10/04
         </div>
 
-        <button class="primary" onclick="closeUnlock()">
-            太棒了！
+
+        <button class="primary"
+                onclick="closeUnlock()">
+
+            太棒了！ 🎉
+
         </button>
 
     </div>
@@ -942,27 +1288,32 @@ svg{
 </div>
 
 
+
 <script>
 
-/* =========================================
-   資料
-========================================= */
+/* =====================================================
+   基本資料
+===================================================== */
 
 let workouts =
-    JSON.parse(localStorage.getItem("fitlife_workouts") || "[]");
+    JSON.parse(
+        localStorage.getItem("fitlife_workouts") || "[]"
+    );
+
 
 let profile =
-    JSON.parse(localStorage.getItem("fitlife_profile") || "{}");
+    JSON.parse(
+        localStorage.getItem("fitlife_profile") || "{}"
+    );
+
 
 /*
-   成就資料格式：
+    每個獎牌：
 
-   {
-      king: {
-          count: 3,
-          lastDate: "2026/10/04"
-      }
-   }
+    {
+        count: 3,
+        lastDate: "2026/10/04"
+    }
 */
 
 let achievements =
@@ -974,20 +1325,26 @@ let achievements =
 let currentChartRange = 7;
 
 let unlockQueue = [];
+
 let unlockShowing = false;
 
 
-/* =========================================
-   日期工具
-========================================= */
+
+/* =====================================================
+   日期
+===================================================== */
 
 function getDateKey(date = new Date()){
 
     const y = date.getFullYear();
 
-    const m = String(date.getMonth() + 1).padStart(2,"0");
+    const m =
+        String(date.getMonth()+1)
+        .padStart(2,"0");
 
-    const d = String(date.getDate()).padStart(2,"0");
+    const d =
+        String(date.getDate())
+        .padStart(2,"0");
 
     return `${y}-${m}-${d}`;
 }
@@ -997,98 +1354,125 @@ function formatDate(date = new Date()){
 
     const y = date.getFullYear();
 
-    const m = String(date.getMonth() + 1).padStart(2,"0");
+    const m =
+        String(date.getMonth()+1)
+        .padStart(2,"0");
 
-    const d = String(date.getDate()).padStart(2,"0");
+    const d =
+        String(date.getDate())
+        .padStart(2,"0");
 
     return `${y}/${m}/${d}`;
 }
 
 
-function getWorkoutDateKey(workout){
+function getWorkoutDateKey(w){
 
-    if(workout.dateKey){
-        return workout.dateKey;
+    if(w.dateKey){
+        return w.dateKey;
     }
 
-    if(workout.timestamp){
-        return getDateKey(new Date(workout.timestamp));
+
+    if(w.timestamp){
+        return getDateKey(
+            new Date(w.timestamp)
+        );
     }
 
-    /*
-       舊版資料沒有 dateKey 時，
-       嘗試從舊的日期格式判斷。
-    */
 
-    return workout.date === new Date().toLocaleDateString()
-        ? getDateKey()
-        : null;
+    if(
+        w.date ===
+        new Date().toLocaleDateString()
+    ){
+        return getDateKey();
+    }
+
+
+    return null;
 }
 
 
-/* =========================================
-   今日資料
-========================================= */
 
-function getTodayWorkouts(){
-
-    const today = getDateKey();
-
-    return workouts.filter(w =>
-        getWorkoutDateKey(w) === today
-    );
-}
-
+/* =====================================================
+   每日資料
+===================================================== */
 
 function getDayData(dateKey){
 
-    const dayWorkouts = workouts.filter(w =>
-        getWorkoutDateKey(w) === dateKey
-    );
+    const list =
+        workouts.filter(
+            w => getWorkoutDateKey(w) === dateKey
+        );
+
 
     let minutes = 0;
+
     let calories = 0;
+
     let steps = 0;
 
-    dayWorkouts.forEach(w => {
 
-        minutes += Number(w.minutes) || 0;
+    list.forEach(w => {
 
-        calories += Number(w.calories) || 0;
+        minutes +=
+            Number(w.minutes) || 0;
 
-        steps += Number(w.steps) || 0;
+        calories +=
+            Number(w.calories) || 0;
+
+        steps +=
+            Number(w.steps) || 0;
 
     });
 
-    const sessions = dayWorkouts.length;
 
-    const energy =
+    const sessions = list.length;
+
+
+    const energy = Math.min(
+        100,
+
         Math.min(60,minutes)
+
         +
-        Math.min(20,Math.round(calories / 50))
+
+        Math.min(
+            20,
+            Math.round(calories / 50)
+        )
+
         +
-        Math.min(20,sessions * 5);
+
+        Math.min(
+            20,
+            sessions * 5
+        )
+    );
+
 
     return {
         minutes,
         calories,
         steps,
         sessions,
-        energy:Math.min(100,energy)
+        energy
     };
 }
 
 
-/* =========================================
-   元氣值
-========================================= */
-
 function calculateEnergy(){
 
-    return getDayData(getDateKey()).energy;
+    return getDayData(
+        getDateKey()
+    ).energy;
 
 }
 
+
+
+/* =====================================================
+   元氣等級
+===================================================== */
 
 function getEnergyInfo(score){
 
@@ -1101,6 +1485,7 @@ function getEnergyInfo(score){
 
     }
 
+
     if(score >= 70){
 
         return {
@@ -1109,6 +1494,7 @@ function getEnergyInfo(score){
         };
 
     }
+
 
     if(score >= 40){
 
@@ -1119,6 +1505,7 @@ function getEnergyInfo(score){
 
     }
 
+
     if(score > 0){
 
         return {
@@ -1128,16 +1515,19 @@ function getEnergyInfo(score){
 
     }
 
+
     return {
         level:"尚未開始",
         emoji:"🌱"
     };
+
 }
 
 
-/* =========================================
+
+/* =====================================================
    成就定義
-========================================= */
+===================================================== */
 
 const ACHIEVEMENTS = [
 
@@ -1147,26 +1537,35 @@ const ACHIEVEMENTS = [
         name:"初次出發",
         description:"完成第一次訓練",
         repeatable:false,
-        condition:() => workouts.length >= 1
+
+        condition:() =>
+            workouts.length >= 1
     },
+
 
     {
         id:"sessions_5",
         icon:"🏅",
         name:"持續行動",
         description:"累計完成 5 次訓練",
-        repeatable:true,
-        condition:() => workouts.length >= 5
+        repeatable:false,
+
+        condition:() =>
+            workouts.length >= 5
     },
+
 
     {
         id:"sessions_10",
         icon:"🥇",
         name:"訓練達人",
         description:"累計完成 10 次訓練",
-        repeatable:true,
-        condition:() => workouts.length >= 10
+        repeatable:false,
+
+        condition:() =>
+            workouts.length >= 10
     },
+
 
     {
         id:"minutes_300",
@@ -1174,12 +1573,20 @@ const ACHIEVEMENTS = [
         name:"300 分鐘",
         description:"累計運動達 300 分鐘",
         repeatable:true,
-        condition:() =>
-            workouts.reduce(
-                (sum,w) => sum + (Number(w.minutes)||0),
-                0
-            ) >= 300
+
+        condition:() => {
+
+            const total =
+                workouts.reduce(
+                    (sum,w) =>
+                    sum + (Number(w.minutes)||0),
+                    0
+                );
+
+            return total >= 300;
+        }
     },
+
 
     {
         id:"steps_10000",
@@ -1187,9 +1594,13 @@ const ACHIEVEMENTS = [
         name:"萬步挑戰",
         description:"單日步數達 10,000 步",
         repeatable:true,
+
         condition:() =>
-            getDayData(getDateKey()).steps >= 10000
+            getDayData(
+                getDateKey()
+            ).steps >= 10000
     },
+
 
     {
         id:"energy_100",
@@ -1197,26 +1608,30 @@ const ACHIEVEMENTS = [
         name:"元氣滿格",
         description:"今日元氣值達到 100",
         repeatable:true,
+
         condition:() =>
             calculateEnergy() >= 100
     },
+
 
     {
         id:"days_7",
         icon:"🔥",
         name:"7日挑戰",
         description:"累計有訓練紀錄的日期達 7 天",
-        repeatable:true,
+        repeatable:false,
+
         condition:() => {
 
             const dates = new Set();
 
             workouts.forEach(w => {
 
-                const key = getWorkoutDateKey(w);
+                const date =
+                    getWorkoutDateKey(w);
 
-                if(key){
-                    dates.add(key);
+                if(date){
+                    dates.add(date);
                 }
 
             });
@@ -1225,40 +1640,54 @@ const ACHIEVEMENTS = [
         }
     },
 
+
     {
         id:"king",
         icon:"👑",
         name:"廷廷大王",
         description:"當日運動目標達成＋元氣值達 90",
         repeatable:true,
+
         condition:() => {
 
-            const today = getDayData(getDateKey());
+            const today =
+                getDayData(getDateKey());
 
-            return today.minutes >= 60 &&
-                   today.energy >= 90;
-
+            return (
+                today.minutes >= 60 &&
+                today.energy >= 90
+            );
         }
     }
 
 ];
 
 
-/* =========================================
-   成就判定
-========================================= */
+
+/* =====================================================
+   判定成就
+===================================================== */
 
 function checkAchievements(showAnimation = true){
 
     const newlyUnlocked = [];
 
+    const today =
+        formatDate();
+
+
     ACHIEVEMENTS.forEach(achievement => {
 
-        if(!achievement.condition()){
+        if(
+            !achievement.condition()
+        ){
             return;
         }
 
-        if(!achievements[achievement.id]){
+
+        if(
+            !achievements[achievement.id]
+        ){
 
             achievements[achievement.id] = {
                 count:0,
@@ -1267,45 +1696,52 @@ function checkAchievements(showAnimation = true){
 
         }
 
+
+        const record =
+            achievements[achievement.id];
+
+
         /*
-           不可重複成就：
-           只有第一次獲得。
+            一次性成就只能獲得一次
         */
 
         if(
             !achievement.repeatable &&
-            achievements[achievement.id].count >= 1
+            record.count >= 1
         ){
             return;
         }
 
+
         /*
-           防止同一天、同一成就因為 update()
-           被重複計算。
-
-           同一天已經獲得過，就不再 +1。
+            可重複成就：
+            同一天只算一次。
         */
-
-        const today = formatDate();
 
         if(
             achievement.repeatable &&
-            achievements[achievement.id].lastDate === today
+            record.lastDate === today
         ){
             return;
         }
 
-        achievements[achievement.id].count += 1;
 
         /*
-           這裡就是你要求的：
-           每次再次獲得獎牌，
-           日期更新成最新一次。
+            ★ 重點：
+            每次重新達成：
+            count + 1
+            lastDate 更新
         */
 
-        achievements[achievement.id].lastDate = today;
+        record.count += 1;
 
-        newlyUnlocked.push(achievement);
+        record.lastDate =
+            today;
+
+
+        newlyUnlocked.push(
+            achievement
+        );
 
     });
 
@@ -1316,25 +1752,28 @@ function checkAchievements(showAnimation = true){
     );
 
 
-    if(showAnimation && newlyUnlocked.length){
+    if(
+        showAnimation &&
+        newlyUnlocked.length
+    ){
 
-        newlyUnlocked.forEach(achievement => {
-
-            unlockQueue.push(achievement);
-
-        });
+        newlyUnlocked.forEach(
+            item => unlockQueue.push(item)
+        );
 
         showNextUnlock();
 
     }
 
+
     return newlyUnlocked;
 }
 
 
-/* =========================================
+
+/* =====================================================
    解鎖動畫
-========================================= */
+===================================================== */
 
 function showNextUnlock(){
 
@@ -1342,93 +1781,136 @@ function showNextUnlock(){
         return;
     }
 
+
     if(unlockQueue.length === 0){
         return;
     }
 
-    const achievement = unlockQueue.shift();
+
+    const achievement =
+        unlockQueue.shift();
+
 
     unlockShowing = true;
 
-    document.getElementById("unlockMedal").textContent =
+
+    document.getElementById(
+        "unlockMedal"
+    ).textContent =
         achievement.icon;
 
-    document.getElementById("unlockName").textContent =
+
+    document.getElementById(
+        "unlockName"
+    ).textContent =
         achievement.name;
 
-    document.getElementById("unlockDescription").textContent =
+
+    document.getElementById(
+        "unlockDescription"
+    ).textContent =
         achievement.description;
 
-    document.getElementById("unlockDate").textContent =
-        "最近獲得：" +
-        achievements[achievement.id].lastDate;
 
-    document.getElementById("unlockOverlay")
-        .classList.add("show");
+    document.getElementById(
+        "unlockDate"
+    ).textContent =
+        "最近獲得：" +
+        achievements[
+            achievement.id
+        ].lastDate;
+
+
+    document.getElementById(
+        "unlockOverlay"
+    ).classList.add("show");
 
 }
 
 
 function closeUnlock(){
 
-    document.getElementById("unlockOverlay")
-        .classList.remove("show");
+    document.getElementById(
+        "unlockOverlay"
+    ).classList.remove("show");
+
 
     unlockShowing = false;
 
-    setTimeout(() => {
 
-        showNextUnlock();
+    setTimeout(
+        () => {
 
-        renderAchievements();
+            showNextUnlock();
 
-    },250);
+            renderAchievements();
+
+        },
+        200
+    );
+
 }
 
 
-/* =========================================
-   導航
-========================================= */
+
+/* =====================================================
+   頁面切換
+===================================================== */
 
 function showPage(page,button){
 
     document.querySelectorAll("section")
-        .forEach(section =>
-            section.classList.add("hidden")
+        .forEach(
+            s => s.classList.add("hidden")
         );
+
 
     document.getElementById(page)
         .classList.remove("hidden");
 
+
     document.querySelectorAll(".nav button")
-        .forEach(btn =>
-            btn.classList.remove("active")
+        .forEach(
+            b => b.classList.remove("active")
         );
 
+
     button.classList.add("active");
+
 
     update();
 
 }
 
 
-/* =========================================
+
+/* =====================================================
    新增訓練
-========================================= */
+===================================================== */
 
 function addWorkout(){
 
     const type =
         document.getElementById("type").value;
 
+
     const minutes =
-        Number(document.getElementById("minutes").value) || 0;
+        Number(
+            document.getElementById("minutes").value
+        ) || 0;
+
 
     const calories =
-        Number(document.getElementById("calories").value) || 0;
+        Number(
+            document.getElementById("calories").value
+        ) || 0;
+
 
     const steps =
-        Number(document.getElementById("steps").value) || 0;
+        Number(
+            document.getElementById("steps").value
+        ) || 0;
+
 
     if(minutes <= 0){
 
@@ -1438,7 +1920,9 @@ function addWorkout(){
     }
 
 
-    const now = new Date();
+    const now =
+        new Date();
+
 
     workouts.unshift({
 
@@ -1450,11 +1934,14 @@ function addWorkout(){
 
         steps,
 
-        date:now.toLocaleDateString(),
+        date:
+            now.toLocaleDateString(),
 
-        dateKey:getDateKey(now),
+        dateKey:
+            getDateKey(now),
 
-        timestamp:now.getTime()
+        timestamp:
+            now.getTime()
 
     });
 
@@ -1466,149 +1953,201 @@ function addWorkout(){
 
 
     /*
-       新增訓練後立即檢查成就。
+        新增運動後立刻自動檢查成就
     */
 
     checkAchievements(true);
 
+
     update();
-
-
-    alert("訓練完成！🎉");
 
 }
 
 
-/* =========================================
+
+/* =====================================================
    快速開始
-========================================= */
+===================================================== */
 
 function quickWorkout(type){
 
-    document.getElementById("type").value = type;
+    document.getElementById(
+        "type"
+    ).value = type;
 
-    document.getElementById("minutes").value = 30;
 
-    document.getElementById("calories").value = 200;
+    document.getElementById(
+        "minutes"
+    ).value = 30;
 
-    document.getElementById("steps").value = 0;
 
-    document.querySelectorAll(".nav button")[1].click();
+    document.getElementById(
+        "calories"
+    ).value = 200;
+
+
+    document.getElementById(
+        "steps"
+    ).value = 0;
+
+
+    document.querySelectorAll(
+        ".nav button"
+    )[1].click();
 
 }
 
 
-/* =========================================
-   刪除訓練
-========================================= */
+
+/* =====================================================
+   刪除
+===================================================== */
 
 function removeWorkout(index){
 
-    if(!confirm("確定要刪除這筆訓練嗎？")){
+    if(
+        !confirm("確定要刪除這筆訓練嗎？")
+    ){
         return;
     }
 
+
     workouts.splice(index,1);
+
 
     localStorage.setItem(
         "fitlife_workouts",
         JSON.stringify(workouts)
     );
 
+
     update();
 
 }
 
 
-/* =========================================
-   首頁
-========================================= */
+
+/* =====================================================
+   首頁更新
+===================================================== */
 
 function updateHome(){
 
     const today =
         getDayData(getDateKey());
 
+
     const energy =
         today.energy;
+
 
     const info =
         getEnergyInfo(energy);
 
 
-    document.getElementById("energyValue")
-        .textContent = energy;
-
-    document.getElementById("energyLevel")
-        .textContent = info.level;
-
-    document.getElementById("energyEmoji")
-        .textContent = info.emoji;
-
-    document.getElementById("energyBar")
-        .style.width = energy + "%";
+    document.getElementById(
+        "energyValue"
+    ).textContent = energy;
 
 
-    document.getElementById("todayMinutes")
-        .textContent = today.minutes;
+    document.getElementById(
+        "energyLevel"
+    ).textContent =
+        info.level;
 
-    document.getElementById("todayCalories")
-        .textContent = today.calories;
 
-    document.getElementById("todaySessions")
-        .textContent = today.sessions;
+    document.getElementById(
+        "energyEmoji"
+    ).textContent =
+        info.emoji;
+
+
+    document.getElementById(
+        "energyBar"
+    ).style.width =
+        energy + "%";
+
+
+    document.getElementById(
+        "todayMinutes"
+    ).textContent =
+        today.minutes;
+
+
+    document.getElementById(
+        "todayCalories"
+    ).textContent =
+        today.calories;
+
+
+    document.getElementById(
+        "todaySessions"
+    ).textContent =
+        today.sessions;
 
 
     const progress =
-        Math.min(100,(today.minutes / 60) * 100);
+        Math.min(
+            100,
+            today.minutes / 60 * 100
+        );
 
-    document.getElementById("progressBar")
-        .style.width = progress + "%";
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        progress + "%";
 
 
-    if(today.minutes >= 60){
+    if(
+        today.minutes >= 60
+    ){
 
-        document.getElementById("goalText")
-            .textContent = "🎉 今日運動目標達成！";
+        document.getElementById(
+            "goalText"
+        ).textContent =
+            "🎉 今日運動目標達成！";
 
     }else{
 
-        document.getElementById("goalText")
-            .textContent =
-            `再運動 ${60 - today.minutes} 分鐘達標`;
+        document.getElementById(
+            "goalText"
+        ).textContent =
+            `再運動 ${
+                60-today.minutes
+            } 分鐘達標`;
 
     }
 
 
-    if(energy === 0){
-
-        document.getElementById("energyText")
-            .textContent =
-            "開始今天的第一個訓練吧！";
-
-    }else{
-
-        document.getElementById("energyText")
-            .textContent =
-            `今天已完成 ${today.minutes} 分鐘運動！`;
-
-    }
+    document.getElementById(
+        "energyText"
+    ).textContent =
+        today.minutes > 0
+        ? `今天已完成 ${today.minutes} 分鐘運動！`
+        : "開始今天的第一個訓練吧！";
 
 }
 
 
-/* =========================================
+
+/* =====================================================
    訓練列表
-========================================= */
+===================================================== */
 
 function renderWorkouts(){
 
-    const container =
-        document.getElementById("workoutList");
+    const box =
+        document.getElementById(
+            "workoutList"
+        );
 
-    if(workouts.length === 0){
 
-        container.innerHTML =
+    if(
+        workouts.length === 0
+    ){
+
+        box.innerHTML =
             `<div class="empty">
                 還沒有訓練紀錄
              </div>`;
@@ -1617,31 +2156,46 @@ function renderWorkouts(){
     }
 
 
-    container.innerHTML =
-        workouts.map((w,index) => {
+    box.innerHTML =
+        workouts.map(
+            (w,index) => `
 
-            return `
             <div class="workout-item">
 
                 <div class="workout-row">
 
                     <div>
-                        <strong>${w.type}</strong>
 
-                        <div style="font-size:12px;color:#6b7280;margin-top:4px;">
+                        <strong>
+                            ${w.type}
+                        </strong>
+
+                        <div style="
+                            font-size:12px;
+                            color:#6b7280;
+                            margin-top:4px;
+                        ">
                             ${w.date || ""}
                         </div>
+
                     </div>
+
 
                     <button
                         class="delete-btn"
                         onclick="removeWorkout(${index})">
+
                         刪除
+
                     </button>
 
                 </div>
 
-                <div style="font-size:13px;margin-top:8px;">
+
+                <div style="
+                    font-size:13px;
+                    margin-top:8px;
+                ">
 
                     ⏱ ${w.minutes || 0} 分鐘　
                     🔥 ${w.calories || 0} kcal　
@@ -1650,28 +2204,38 @@ function renderWorkouts(){
                 </div>
 
             </div>
-            `;
 
-        }).join("");
+        `
+        ).join("");
 
 }
 
 
-/* =========================================
+
+/* =====================================================
    課程
-========================================= */
+===================================================== */
 
 function generateCourses(){
 
     profile = {
 
-        goal:document.getElementById("goal").value,
+        goal:
+            document.getElementById(
+                "goal"
+            ).value,
 
-        level:document.getElementById("level").value,
+        level:
+            document.getElementById(
+                "level"
+            ).value,
 
-        duration:Number(
-            document.getElementById("duration").value
-        )
+        duration:
+            Number(
+                document.getElementById(
+                    "duration"
+                ).value
+            )
 
     };
 
@@ -1692,28 +2256,33 @@ function renderCourses(){
     const goal =
         profile.goal || "體能";
 
+
     const level =
         profile.level || "初學者";
+
 
     const duration =
         profile.duration || 30;
 
 
-    document.getElementById("goal").value =
-        goal;
-
-    document.getElementById("level").value =
-        level;
-
-    document.getElementById("duration").value =
-        duration;
+    document.getElementById(
+        "goal"
+    ).value = goal;
 
 
-    const result =
-        document.getElementById("courseResult");
+    document.getElementById(
+        "level"
+    ).value = level;
 
 
-    result.innerHTML = `
+    document.getElementById(
+        "duration"
+    ).value = duration;
+
+
+    document.getElementById(
+        "courseResult"
+    ).innerHTML = `
 
         <div class="card">
 
@@ -1721,20 +2290,42 @@ function renderCourses(){
                 ✨ 你的推薦課程
             </div>
 
-            <div style="font-size:14px;line-height:1.8;">
+            <div style="
+                font-size:14px;
+                line-height:1.9;
+            ">
 
-                🎯 目標：<strong>${goal}</strong><br>
+                🎯 目標：
+                <strong>${goal}</strong>
+                <br>
 
-                📈 程度：<strong>${level}</strong><br>
+                📈 程度：
+                <strong>${level}</strong>
+                <br>
 
-                ⏱ 時間：<strong>${duration} 分鐘</strong>
+                ⏱ 時間：
+                <strong>${duration} 分鐘</strong>
 
             </div>
 
-            <div style="margin-top:14px;background:#f9fafb;border-radius:14px;padding:14px;line-height:1.8;font-size:14px;">
 
-                🏃 熱身 5 分鐘<br>
-                💪 主要訓練 ${Math.max(5,duration-10)} 分鐘<br>
+            <div style="
+                margin-top:14px;
+                background:#f9fafb;
+                border-radius:14px;
+                padding:14px;
+                line-height:1.9;
+                font-size:14px;
+            ">
+
+                🏃 熱身 5 分鐘
+                <br>
+
+                💪 主要訓練
+                ${Math.max(5,duration-10)}
+                分鐘
+                <br>
+
                 🧘 收操 5 分鐘
 
             </div>
@@ -1746,9 +2337,10 @@ function renderCourses(){
 }
 
 
-/* =========================================
+
+/* =====================================================
    統計
-========================================= */
+===================================================== */
 
 function updateStats(){
 
@@ -1768,41 +2360,61 @@ function updateStats(){
         );
 
 
-    const totalSessions =
+    const sessions =
         workouts.length;
 
 
     const average =
-        totalSessions
-        ? Math.round(totalMinutes / totalSessions)
+        sessions
+        ? Math.round(
+            totalMinutes / sessions
+          )
         : 0;
 
 
-    document.getElementById("totalMinutes")
-        .textContent = totalMinutes;
+    document.getElementById(
+        "totalMinutes"
+    ).textContent =
+        totalMinutes;
 
-    document.getElementById("totalCalories")
-        .textContent = totalCalories;
 
-    document.getElementById("totalSessions")
-        .textContent = totalSessions;
+    document.getElementById(
+        "totalCalories"
+    ).textContent =
+        totalCalories;
 
-    document.getElementById("averageMinutes")
-        .textContent = average;
+
+    document.getElementById(
+        "totalSessions"
+    ).textContent =
+        sessions;
+
+
+    document.getElementById(
+        "averageMinutes"
+    ).textContent =
+        average;
 
 
     const today =
         getDayData(getDateKey());
 
 
-    document.getElementById("statsEnergy")
-        .textContent = today.energy;
+    document.getElementById(
+        "statsEnergy"
+    ).textContent =
+        today.energy;
 
 
-    document.getElementById("statsCompletion")
-        .textContent =
-        Math.min(100,Math.round(today.minutes / 60 * 100))
-        + "%";
+    document.getElementById(
+        "statsCompletion"
+    ).textContent =
+        Math.min(
+            100,
+            Math.round(
+                today.minutes / 60 * 100
+            )
+        ) + "%";
 
 
     renderDistribution();
@@ -1812,19 +2424,24 @@ function updateStats(){
 }
 
 
-/* =========================================
+
+/* =====================================================
    訓練分布
-========================================= */
+===================================================== */
 
 function renderDistribution(){
 
-    const container =
-        document.getElementById("distribution");
+    const box =
+        document.getElementById(
+            "distribution"
+        );
 
 
-    if(workouts.length === 0){
+    if(
+        workouts.length === 0
+    ){
 
-        container.innerHTML =
+        box.innerHTML =
             `<div class="empty">
                 還沒有資料
              </div>`;
@@ -1834,6 +2451,7 @@ function renderDistribution(){
 
 
     const counts = {};
+
 
     workouts.forEach(w => {
 
@@ -1847,52 +2465,95 @@ function renderDistribution(){
         workouts.length;
 
 
-    container.innerHTML =
+    box.innerHTML =
         Object.entries(counts)
-        .sort((a,b) => b[1]-a[1])
-        .map(([type,count]) => {
+        .sort(
+            (a,b) => b[1]-a[1]
+        )
+        .map(
+            ([type,count]) => {
 
-            const percent =
-                Math.round(count / total * 100);
+                const percent =
+                    Math.round(
+                        count / total * 100
+                    );
 
-            return `
 
-                <div style="margin-bottom:12px;">
+                return `
 
-                    <div style="display:flex;justify-content:space-between;font-size:13px;">
-                        <strong>${type}</strong>
-                        <span>${count} 次</span>
-                    </div>
+                    <div style="
+                        margin-bottom:12px;
+                    ">
 
-                    <div class="progress" style="background:#e5e7eb;margin:6px 0 0;">
-                        <div
-                            class="progress-bar"
-                            style="width:${percent}%;">
+                        <div style="
+                            display:flex;
+                            justify-content:space-between;
+                            font-size:13px;
+                        ">
+
+                            <strong>
+                                ${type}
+                            </strong>
+
+                            <span>
+                                ${count} 次
+                            </span>
+
                         </div>
+
+
+                        <div class="progress"
+                             style="
+                                background:#e5e7eb;
+                                margin:6px 0 0;
+                             ">
+
+                            <div
+                                class="progress-bar"
+                                style="
+                                    width:${percent}%;
+                                ">
+                            </div>
+
+                        </div>
+
                     </div>
 
-                </div>
+                `;
 
-            `;
-
-        }).join("");
+            }
+        )
+        .join("");
 
 }
 
 
-/* =========================================
+
+/* =====================================================
    曲線圖
-========================================= */
+===================================================== */
 
 function setChartRange(range){
 
-    currentChartRange = range;
+    currentChartRange =
+        range;
 
-    document.getElementById("chart7Btn")
-        .classList.toggle("active",range === 7);
 
-    document.getElementById("chart30Btn")
-        .classList.toggle("active",range === 30);
+    document.getElementById(
+        "chart7Btn"
+    ).classList.toggle(
+        "active",
+        range === 7
+    );
+
+
+    document.getElementById(
+        "chart30Btn"
+    ).classList.toggle(
+        "active",
+        range === 30
+    );
+
 
     drawChart();
 
@@ -1902,7 +2563,10 @@ function setChartRange(range){
 function drawChart(){
 
     const svg =
-        document.getElementById("statsChart");
+        document.getElementById(
+            "statsChart"
+        );
+
 
     if(!svg){
         return;
@@ -1923,49 +2587,60 @@ function drawChart(){
 
 
     const chartWidth =
-        width - left - right;
+        width-left-right;
+
 
     const chartHeight =
-        height - top - bottom;
+        height-top-bottom;
 
 
     const dates = [];
 
 
-    for(let i=currentChartRange-1;i>=0;i--){
+    for(
+        let i=currentChartRange-1;
+        i>=0;
+        i--
+    ){
 
-        const date = new Date();
+        const date =
+            new Date();
+
 
         date.setDate(
-            date.getDate() - i
+            date.getDate()-i
         );
 
-        dates.push(getDateKey(date));
+
+        dates.push(
+            getDateKey(date)
+        );
 
     }
 
 
     const data =
-        dates.map(date =>
-            getDayData(date)
+        dates.map(
+            date => getDayData(date)
         );
 
 
     const maxSteps =
         Math.max(
             10000,
-            ...data.map(d => d.steps)
+            ...data.map(
+                d => d.steps
+            )
         );
 
 
     const maxCalories =
         Math.max(
             500,
-            ...data.map(d => d.calories)
+            ...data.map(
+                d => d.calories
+            )
         );
-
-
-    const maxEnergy = 100;
 
 
     function x(i){
@@ -1975,7 +2650,8 @@ function drawChart(){
         }
 
         return left +
-            i * chartWidth / (data.length-1);
+            i * chartWidth /
+            (data.length-1);
 
     }
 
@@ -1984,15 +2660,423 @@ function drawChart(){
 
         return top +
             chartHeight -
-            (value/max) * chartHeight;
+            value/max *
+            chartHeight;
 
     }
 
 
     function makePath(values,max){
 
-        return values.map((value,i) => {
+        return values
+            .map(
+                (value,i) =>
+                    `${i===0?"M":"L"} ${x(i)} ${y(value,max)}`
+            )
+            .join(" ");
 
-            const px = x(i);
+    }
 
-            const py = y(value,max);
+
+    let html = "";
+
+
+    /* 網格 */
+
+    for(let i=0;i<=4;i++){
+
+        const gy =
+            top +
+            chartHeight*i/4;
+
+
+        html += `
+            <line
+                x1="${left}"
+                y1="${gy}"
+                x2="${width-right}"
+                y2="${gy}"
+                stroke="#e5e7eb"
+                stroke-width="1"
+            />
+        `;
+
+    }
+
+
+    /* 步數 */
+
+    html += `
+        <path
+            d="${makePath(
+                data.map(d=>d.steps),
+                maxSteps
+            )}"
+            fill="none"
+            stroke="#111827"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+    `;
+
+
+    /* 熱量 */
+
+    html += `
+        <path
+            d="${makePath(
+                data.map(d=>d.calories),
+                maxCalories
+            )}"
+            fill="none"
+            stroke="#f59e0b"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+    `;
+
+
+    /* 元氣 */
+
+    html += `
+        <path
+            d="${makePath(
+                data.map(d=>d.energy),
+                100
+            )}"
+            fill="none"
+            stroke="#22c55e"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+    `;
+
+
+    /* 日期 */
+
+    data.forEach(
+        (d,i) => {
+
+            if(
+                currentChartRange === 7 ||
+                i === 0 ||
+                i === data.length-1 ||
+                i % 5 === 0
+            ){
+
+                const date =
+                    dates[i]
+                    .slice(5)
+                    .replace("-","/");
+
+
+                html += `
+                    <text
+                        x="${x(i)}"
+                        y="${height-10}"
+                        text-anchor="middle"
+                        class="chart-label"
+                    >
+                        ${date}
+                    </text>
+                `;
+
+            }
+
+        }
+    );
+
+
+    svg.innerHTML =
+        html;
+
+}
+
+
+
+/* =====================================================
+   成就頁
+===================================================== */
+
+function renderAchievements(){
+
+    const grid =
+        document.getElementById(
+            "achievementGrid"
+        );
+
+
+    let totalMedals = 0;
+
+    let unlockedCount = 0;
+
+    let latest = null;
+
+
+    ACHIEVEMENTS.forEach(
+        achievement => {
+
+            const record =
+                achievements[
+                    achievement.id
+                ];
+
+
+            const count =
+                record
+                ? record.count
+                : 0;
+
+
+            const lastDate =
+                record
+                ? record.lastDate
+                : null;
+
+
+            if(count > 0){
+
+                totalMedals += count;
+
+                unlockedCount++;
+
+
+                if(
+                    !latest ||
+                    lastDate >
+                    latest.date
+                ){
+
+                    latest = {
+
+                        achievement,
+
+                        date:lastDate
+
+                    };
+
+                }
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalMedals"
+    ).textContent =
+        totalMedals;
+
+
+    document.getElementById(
+        "unlockedAchievementCount"
+    ).textContent =
+        unlockedCount;
+
+
+    document.getElementById(
+        "achievementCount"
+    ).textContent =
+        ACHIEVEMENTS.length;
+
+
+    document.getElementById(
+        "achievementProgressBar"
+    ).style.width =
+        (
+            unlockedCount /
+            ACHIEVEMENTS.length *
+            100
+        ) + "%";
+
+
+    if(latest){
+
+        document.getElementById(
+            "latestAchievement"
+        ).innerHTML = `
+
+            <div class="latest-title">
+                🌟 最近獲得
+            </div>
+
+            <div class="latest-content">
+
+                <div class="latest-icon">
+                    ${latest.achievement.icon}
+                </div>
+
+                <div>
+
+                    <div class="latest-name">
+                        ${latest.achievement.name}
+                    </div>
+
+                    <div class="latest-date">
+                        📅 最近獲得：
+                        ${latest.date}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    grid.innerHTML =
+        ACHIEVEMENTS
+        .map(
+            achievement => {
+
+                const record =
+                    achievements[
+                        achievement.id
+                    ];
+
+
+                const count =
+                    record
+                    ? record.count
+                    : 0;
+
+
+                const unlocked =
+                    count > 0;
+
+
+                return `
+
+                    <div class="
+                        medal-card
+                        ${unlocked
+                            ? "unlocked"
+                            : "locked"}
+                    ">
+
+                        <div class="medal-icon">
+
+                            ${unlocked
+                                ? achievement.icon
+                                : "🔒"}
+
+                        </div>
+
+
+                        <div class="medal-name">
+
+                            ${achievement.name}
+
+                        </div>
+
+
+                        <div class="
+                            medal-description
+                        ">
+
+                            ${achievement.description}
+
+                        </div>
+
+
+                        ${
+                            unlocked
+
+                            ?
+
+                            `
+
+                            <div class="
+                                medal-count
+                            ">
+
+                                🏅 已獲得
+                                ${count} 次
+
+                            </div>
+
+
+                            <div class="
+                                medal-date
+                            ">
+
+                                📅 最近獲得：
+                                ${record.lastDate}
+
+                            </div>
+
+                            `
+
+                            :
+
+                            `
+
+                            <div class="
+                                locked-text
+                            ">
+
+                                🔒 尚未解鎖
+
+                            </div>
+
+                            `
+                        }
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+
+/* =====================================================
+   整體更新
+===================================================== */
+
+function update(){
+
+    /*
+       載入時自動判定一次。
+
+       這裡不播放動畫，
+       避免每次重新整理頁面一直跳動畫。
+    */
+
+    checkAchievements(false);
+
+
+    updateHome();
+
+    renderWorkouts();
+
+    renderCourses();
+
+    updateStats();
+
+    renderAchievements();
+
+}
+
+
+
+/* =====================================================
+   啟動
+===================================================== */
+
+update();
+
+</script>
+
+</body>
+</html>
