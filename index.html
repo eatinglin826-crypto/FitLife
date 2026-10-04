@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#111827">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="廷廷運動">
+<meta name="apple-mobile-web-app-title" content="帥廷運動">
 
-<title>廷廷運動</title>
+<title>帥廷運動</title>
 
 <style>
 
@@ -324,19 +324,13 @@ select{
     display:inline-block;
 }
 
-/* 步數：綠色 */
-
 .steps-line{
     background:#22c55e;
 }
 
-/* 熱量：橘色 */
-
 .calories-line{
     background:#f59e0b;
 }
-
-/* 元氣值：藍色 */
 
 .energy-line{
     background:#2563eb;
@@ -468,6 +462,10 @@ select{
 .trophy-big{
     font-size:62px;
 }
+
+/* =========================
+   成就進度
+========================= */
 
 .achievement-progress{
     height:9px;
@@ -697,7 +695,7 @@ select{
 <header>
 
     <div class="logo">
-        廷廷運動 🏃
+        帥廷運動 🏃
     </div>
 
     <div class="tagline">
@@ -1022,7 +1020,7 @@ select{
 
 <!-- ==================================
      統計
-================================== -->
+===================================== -->
 
 <section id="stats"
          class="hidden">
@@ -1096,10 +1094,6 @@ select{
     </div>
 
 
-    <!-- ==================================
-         新版運動曲線
-    ================================== -->
-
     <div class="card">
 
         <div class="card-title">
@@ -1130,8 +1124,6 @@ select{
              preserveAspectRatio="none">
         </svg>
 
-
-        <!-- 三條線的對應圖例 -->
 
         <div class="legend">
 
@@ -1169,8 +1161,6 @@ select{
 
         </div>
 
-
-        <!-- 點擊日期後顯示詳細資料 -->
 
         <div class="chart-detail"
              id="chartDetail">
@@ -2902,12 +2892,6 @@ function drawChart(){
         );
 
 
-    /*
-        三條線各自使用自己的最大值，
-        這樣步數很大時，
-        不會把熱量和元氣值壓扁。
-    */
-
     const maxSteps =
         Math.max(
             10000,
@@ -2994,7 +2978,6 @@ function drawChart(){
 
     /* =========================
        👟 步數
-       綠色
     ========================= */
 
     html += `
@@ -3014,7 +2997,6 @@ function drawChart(){
 
     /* =========================
        🔥 熱量
-       橘色
     ========================= */
 
     html += `
@@ -3034,7 +3016,6 @@ function drawChart(){
 
     /* =========================
        ⚡ 元氣值
-       藍色
     ========================= */
 
     html += `
@@ -3053,14 +3034,10 @@ function drawChart(){
 
 
     /* =========================
-       三條線的資料點
+       資料點
     ========================= */
 
     data.forEach((d,i) => {
-
-        /*
-            步數資料點
-        */
 
         html += `
             <circle
@@ -3076,10 +3053,6 @@ function drawChart(){
         `;
 
 
-        /*
-            熱量資料點
-        */
-
         html += `
             <circle
                 class="chart-point"
@@ -3093,10 +3066,6 @@ function drawChart(){
             />
         `;
 
-
-        /*
-            元氣值資料點
-        */
 
         html += `
             <circle
@@ -3154,10 +3123,6 @@ function drawChart(){
     svg.innerHTML =
         html;
 
-
-    /*
-        預設顯示今天
-    */
 
     showChartDay(
         data.length-1
